@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class GetStartedButton extends StatelessWidget {
+  final String title;
   const GetStartedButton({
     Key key,
+    this.title = '',
   }) : super(key: key);
 
   @override
