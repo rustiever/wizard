@@ -125,111 +125,6 @@ class HomeView extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 60.0),
-                  child: Wrap(
-                    alignment: WrapAlignment.center,
-                    spacing: 10.0,
-                    runAlignment: WrapAlignment.center,
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    runSpacing: 10.0,
-                    children: const [
-                      CustomChoiceChip(
-                        label: 'Future',
-                      ),
-                      CustomChoiceChip(
-                        label: 'OneZero',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Technology',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Elemental',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Health',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Science',
-                      ),
-                      CustomChoiceChip(
-                        label: 'GEN',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Business',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Marker',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Work',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Culture',
-                      ),
-                      CustomChoiceChip(
-                        label: 'ZORA',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Tenderly',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Food',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Heated',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Programming',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Design',
-                      ),
-                      CustomChoiceChip(
-                        label: 'LGBTQIA',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Neuroscience',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Level',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Cryptocurrency',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Startups',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Self',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Human Parts',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Relationships',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Politics',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Forge',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Data Science',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Productivity',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Artificial Intelligence',
-                      ),
-                      CustomChoiceChip(
-                        label: 'Election 2020',
-                      ),
-                    ],
-                  ),
-                ),
                 const Center(
                   heightFactor: 2.5,
                   child: SizedBox(
@@ -380,7 +275,7 @@ class HomeView extends StatelessWidget {
                               height: 30,
                             ),
                             Text(
-                              "wizard is not like any other platform on the internet. Our sole purpose is to help you find compelling ideas, knowledge, and perspectives. We don’t serve ads—we serve you, the curious reader who loves to learn new things. wizard is home to thousands of independent voices, and we combine humans and technology to find the best reading for you—and filter out the rest.",
+                              "Wizard is not like any other platform on the internet. Our sole purpose is to help you find compelling ideas, knowledge, and perspectives. We don’t serve ads—we serve you, the curious reader who loves to learn new things. wizard is home to thousands of independent voices, and we combine humans and technology to find the best reading for you—and filter out the rest.",
                               style: TextStyle(
                                   color: Color(0xff757575),
                                   fontSize: 24.0,
@@ -568,6 +463,35 @@ class AuthWidget extends StatelessWidget {
                         fontWeight: FontWeight.w400),
                   ),
                   const Spacer(),
+                  if (isSignUp)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 50, vertical: 15),
+                      child: TextFormField(
+                        controller: controller.name,
+                        decoration: InputDecoration(
+                          labelText: "Enter Name",
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                          ),
+                        ),
+                        validator: (val) {
+                          if (val.isEmpty) {
+                            return "Name cannot be empty";
+                          } else if (!GetUtils.isUsername(val)) {
+                            return 'Not valid Name';
+                          } else {
+                            return null;
+                          }
+                        },
+                        style: const TextStyle(
+                          fontFamily: "Poppins",
+                        ),
+                      ),
+                    )
+                  else
+                    const SizedBox.shrink(),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 50, vertical: 20),
@@ -579,11 +503,12 @@ class AuthWidget extends StatelessWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25.0),
                         ),
-                        //fillColor: Colors.green
                       ),
                       validator: (val) {
                         if (val.isEmpty) {
                           return "Email cannot be empty";
+                        } else if (!GetUtils.isEmail(val)) {
+                          return 'Not valid email';
                         } else {
                           return null;
                         }
@@ -597,6 +522,7 @@ class AuthWidget extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 50, vertical: 10),
                     child: TextFormField(
+                      obscureText: true,
                       controller: controller.pass,
                       decoration: InputDecoration(
                         labelText: "Enter Password",
@@ -604,11 +530,12 @@ class AuthWidget extends StatelessWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25.0),
                         ),
-                        //fillColor: Colors.green
                       ),
                       validator: (val) {
                         if (val.isEmpty) {
                           return "password cannot be empty";
+                        } else if (!GetUtils.isLengthBetween(val, 8, 12)) {
+                          return 'Not a valid password';
                         } else {
                           return null;
                         }
@@ -626,7 +553,9 @@ class AuthWidget extends StatelessWidget {
                       if (_formKey.currentState.validate()) {
                         isSignUp
                             ? await service.createUserWithEmailAndPassword(
-                                controller.email.text, controller.pass.text)
+                                controller.email.text,
+                                controller.pass.text,
+                                controller.name.text)
                             : await service.signInWithEmailAndPassword(
                                 controller.email.text, controller.pass.text);
                         if (Get.isDialogOpen) Get.back();
