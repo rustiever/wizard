@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'widgets.dart';
 
 class GetStartedButton extends StatelessWidget {
   final String title;
@@ -11,7 +14,11 @@ class GetStartedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return RaisedButton(
       padding: const EdgeInsets.all(18.0),
-      onPressed: () {},
+      onPressed: () {
+        Get.dialog(
+          AuthWidget(),
+        );
+      },
       color: const Color(0xff4ba97d),
       child: const Text(
         'Get Started',
