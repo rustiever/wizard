@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:wizard/services/firebaseServices.dart';
 
@@ -27,7 +25,7 @@ class HomeView extends StatelessWidget {
               icon: const Icon(
                 Icons.search_sharp,
                 color: Color(0xff757575),
-                size: 30.0,
+                size: 25.0,
               ),
               padding: const EdgeInsets.all(15.0),
               onPressed: () {}),
@@ -35,7 +33,7 @@ class HomeView extends StatelessWidget {
               icon: const Icon(
                 Icons.bookmark_outline_rounded,
                 color: Color(0xff757575),
-                size: 30.0,
+                size: 25.0,
               ),
               padding: const EdgeInsets.all(15.0),
               onPressed: () {}),
@@ -43,29 +41,62 @@ class HomeView extends StatelessWidget {
               icon: const Icon(
                 Icons.notifications_on_outlined,
                 color: Color(0xff757575),
-                size: 30.0,
+                size: 25.0,
               ),
               padding: const EdgeInsets.all(15.0),
               onPressed: () {}),
           IconButton(
-              icon: const Icon(
-                Icons.person_outline_rounded,
-                color: Color(0xff757575),
-                size: 30.0,
+              icon: const CircleAvatar(
+                // radius: 100.0,
+                backgroundColor: Colors.green,
+                child: Icon(
+                  Icons.person_outline_rounded,
+                  color: Color(0xff757575),
+                  size: 20.0,
+                ),
               ),
-              padding: const EdgeInsets.fromLTRB(15.0, 15.0, 80.0, 15.0),
+              padding: const EdgeInsets.all(10.0),
               onPressed: () {}),
         ],
       ),
       body: ListView(
         children: [
+          const SizedBox(
+            height: 30.0,
+          ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Post1(
                 onTap: () {},
               ),
+              const SizedBox(
+                height: 460,
+                child: VerticalDivider(
+                  color: Colors.black,
+                  thickness: 0.5,
+                  width: 5,
+                ),
+              ),
               Column(
-                children: [
+                children: const [
+                  Post2(),
+                  Post2(),
+                  Post2(),
+                  Post2(),
+                ],
+              ),
+              const SizedBox(
+                height: 460,
+                child: VerticalDivider(
+                  color: Colors.black,
+                  thickness: 0.5,
+                  width: 5,
+                ),
+              ),
+              Column(
+                children: const [
                   Post2(),
                   Post2(),
                   Post2(),
@@ -219,12 +250,24 @@ class Post1 extends StatelessWidget {
             ),
             GestureDetector(
               onTap: onTap,
-              child: Text(
-                'Read More . $readTime min read',
-                style: const TextStyle(
+              child: Row(
+                children: [
+                  Text(
+                    'Read More . $readTime min read ',
+                    style: const TextStyle(
+                        color: Colors.grey,
+                        fontFamily: "Helvetica Neue",
+                        fontSize: 13),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  const Icon(
+                    Icons.star_rate,
+                    size: 13,
                     color: Colors.grey,
-                    fontFamily: "Helvetica Neue",
-                    fontSize: 13),
+                  )
+                ],
               ),
             )
           ],
@@ -242,7 +285,7 @@ class Post2 extends StatelessWidget {
       content,
       readTime,
       community;
-
+  final void Function() onTap;
   const Post2(
       {Key key,
       this.postImage =
@@ -254,14 +297,96 @@ class Post2 extends StatelessWidget {
       this.content =
           'Before getting started, the documentation assumes you are able to create (or have an existing) Flutter project and also have an active Firebase project. If you do not meet these prerequisites, follow the links below',
       this.readTime = '5',
-      this.community = 'Flutter Community'})
+      this.community = 'Flutter Community',
+      this.onTap})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
-      height: 150,
-      width: 320,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15.0),
+      child: Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(authorImage),
+                    radius: 12.0,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: authorName,
+                          style: const TextStyle(
+                              fontFamily: "Helvetica Neue",
+                              color: Colors.black),
+                        ),
+                        const TextSpan(
+                          text: ' in ',
+                          style: TextStyle(
+                              fontFamily: "Helvetica Neue", color: Colors.grey),
+                        ),
+                        TextSpan(
+                          text: community,
+                          style: const TextStyle(
+                              fontFamily: "Helvetica Neue",
+                              color: Colors.black),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              GestureDetector(
+                onTap: onTap,
+                child: SizedBox(
+                  width: 230,
+                  child: Text(
+                    title + title,
+                    style: const TextStyle(
+                        fontFamily: "Helvetica Neue",
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              GestureDetector(
+                onTap: onTap,
+                child: Text(
+                  'Read More . $readTime min read',
+                  style: const TextStyle(
+                      color: Colors.grey,
+                      fontFamily: "Helvetica Neue",
+                      fontSize: 13),
+                ),
+              )
+            ],
+          ),
+          const SizedBox(
+            width: 20,
+          ),
+          SizedBox(
+            width: 130,
+            height: 100,
+            child: Image.network(
+              postImage,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
