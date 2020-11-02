@@ -38,7 +38,7 @@ class FirebaseService {
 
   Future<void> signInWithEmailAndPassword(String email, String pass) async {
     try {
-      final UserCredential userCredential = await FirebaseAuth.instance
+      await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: pass);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

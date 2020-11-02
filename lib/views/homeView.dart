@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:wizard/services/firebaseServices.dart';
+import 'package:wizard/widgets/widgets.dart';
 
 class HomeView extends StatelessWidget {
+  final bottomMenu = [
+    "Help",
+    "Status",
+    "Writers",
+    "Blog",
+    "Careers",
+    "Privacy",
+    "Terms",
+    "About"
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +65,12 @@ class HomeView extends StatelessWidget {
                   size: 20.0,
                 ),
               ),
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.fromLTRB(
+                10.0,
+                10.0,
+                50.0,
+                10.0,
+              ),
               onPressed: () {}),
         ],
       ),
@@ -110,281 +125,156 @@ class HomeView extends StatelessWidget {
             thickness: 0.5,
             height: 5,
           ),
-          Center(
-            child: RaisedButton(
-              onPressed: () async {
-                await FirebaseService().signOut();
-              },
-              child: const Text('sign out'),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// Column(
-//   children: [
-//     Post2(),
-//     Post2(),
-//     Post2(),
-//     Post2(),
-//   ],
-// ),
-// const Padding(
-//   padding: EdgeInsets.symmetric(horizontal: 22.0),
-//   child: SizedBox(
-//     height: 600,
-//     child: VerticalDivider(
-//       color: Colors.black,
-//       thickness: 0.5,
-//       width: 5,
-//     ),
-//   ),
-// ),
-// Column(
-//   children: [
-//     Post2(),
-//     Post2(),
-//     Post2(),
-//     Post2(),
-//   ],
-// ),
-// // Container(
-// //   width: 600,
-// //   height: 400,
-// //   color: Colors.green,
-// // ),
-
-class Post1 extends StatelessWidget {
-  final String postImage,
-      authorName,
-      authorImage,
-      title,
-      content,
-      readTime,
-      community;
-
-  final void Function() onTap;
-
-  const Post1(
-      {Key key,
-      this.postImage =
-          'https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
-      this.authorName = 'Sharan',
-      this.authorImage =
-          'https://images.unsplash.com/photo-1504593811423-6dd665756598?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
-      this.title = 'Title of this title of this title',
-      this.content =
-          'In this article, we will draw a curved dashed in Flutter.',
-      this.readTime = '5',
-      this.community = 'Flutter Community',
-      this.onTap})
-      : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 26.0),
-      child: SizedBox(
-        width: 350,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          // mainAxisAlignment: Mai,
-          children: [
-            GestureDetector(
-              onTap: onTap,
-              child: SizedBox(
-                height: 260,
-                width: 360,
-                child: Image.network(
-                  postImage,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Row(
-              children: [
-                CircleAvatar(
-                  backgroundImage: NetworkImage(authorImage),
-                  radius: 12.0,
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Text(authorName)
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            GestureDetector(
-              onTap: onTap,
-              child: Text(
-                title,
-                style: const TextStyle(
+          Padding(
+            padding: const EdgeInsets.only(left: 66.0),
+            child: ListTile(
+              title: const Text(
+                "TRENDING ON WIZARD",
+                style: TextStyle(
                     fontFamily: "Helvetica Neue",
-                    fontSize: 22,
+                    fontSize: 12,
                     fontWeight: FontWeight.w700),
               ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            GestureDetector(
-              onTap: onTap,
-              child: Text(
-                content,
-                style: const TextStyle(
-                    fontFamily: "Times New Roman",
-                    fontSize: 18,
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w400),
+              leading: CircleAvatar(
+                radius: 12,
+                backgroundColor: Colors.grey[200],
+                child: const Icon(
+                  Icons.stacked_line_chart_outlined,
+                  size: 20,
+                  color: Color(0xff4ba97d),
+                ),
               ),
             ),
-            const SizedBox(
-              height: 15,
-            ),
-            GestureDetector(
-              onTap: onTap,
-              child: Row(
-                children: [
-                  Text(
-                    'Read More . $readTime min read ',
-                    style: const TextStyle(
-                        color: Colors.grey,
-                        fontFamily: "Helvetica Neue",
-                        fontSize: 13),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: const [
+                  Post2(
+                    number: '01',
                   ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  const Icon(
-                    Icons.star_rate,
-                    size: 13,
-                    color: Colors.grey,
+                  Post2(
+                    number: '02',
                   )
                 ],
               ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class Post2 extends StatelessWidget {
-  final String postImage,
-      authorName,
-      authorImage,
-      title,
-      content,
-      readTime,
-      community;
-  final void Function() onTap;
-  const Post2(
-      {Key key,
-      this.postImage =
-          'https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
-      this.authorName = 'Sharan',
-      this.authorImage =
-          'https://images.unsplash.com/photo-1504593811423-6dd665756598?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
-      this.title = 'title of this title of this title',
-      this.content =
-          'Before getting started, the documentation assumes you are able to create (or have an existing) Flutter project and also have an active Firebase project. If you do not meet these prerequisites, follow the links below',
-      this.readTime = '5',
-      this.community = 'Flutter Community',
-      this.onTap})
-      : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15.0),
-      child: Row(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  CircleAvatar(
-                    backgroundImage: NetworkImage(authorImage),
-                    radius: 12.0,
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: const [
+                  Post2(
+                    number: '03',
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: authorName,
-                          style: const TextStyle(
-                              fontFamily: "Helvetica Neue",
-                              color: Colors.black),
-                        ),
-                        const TextSpan(
-                          text: ' in ',
-                          style: TextStyle(
-                              fontFamily: "Helvetica Neue", color: Colors.grey),
-                        ),
-                        TextSpan(
-                          text: community,
-                          style: const TextStyle(
-                              fontFamily: "Helvetica Neue",
-                              color: Colors.black),
-                        ),
-                      ],
-                    ),
-                  ),
+                  Post2(
+                    number: '04',
+                  )
                 ],
               ),
-              const SizedBox(
-                height: 8,
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: const [
+                  Post2(
+                    number: '05',
+                  ),
+                  Post2(
+                    number: '06',
+                  )
+                ],
               ),
-              GestureDetector(
-                onTap: onTap,
-                child: SizedBox(
-                  width: 230,
-                  child: Text(
-                    title + title,
-                    style: const TextStyle(
-                        fontFamily: "Helvetica Neue",
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700),
+            ],
+          ),
+          const Divider(
+            color: Colors.black,
+            thickness: 0.5,
+            height: 5,
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 660,
+                padding: const EdgeInsets.fromLTRB(90, 0, 60, 50),
+                // height: 200,
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    children: List.generate(
+                      20,
+                      (index) => const Post3(),
+                    ),
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              GestureDetector(
-                onTap: onTap,
-                child: Text(
-                  'Read More . $readTime min read',
-                  style: const TextStyle(
-                      color: Colors.grey,
-                      fontFamily: "Helvetica Neue",
-                      fontSize: 13),
+              SizedBox(
+                // height: 150,
+                width: 450,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 150,
+                      width: 450,
+                      color: const Color(0xfffafafa),
+                      child: const ListTile(
+                        isThreeLine: true,
+                        contentPadding: EdgeInsets.all(15),
+                        dense: true,
+                        title: Text(
+                          "Bookmark stories for later",
+                          style: TextStyle(
+                              fontFamily: "Helvetica Neue",
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        subtitle: Padding(
+                          padding: EdgeInsets.only(top: 18.0),
+                          child: Text(
+                            'Start saving stories by clicking the bookmark icon and you’ll find them in Reading List.',
+                            style: TextStyle(
+                                fontFamily: "Helvetica Neue",
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                        leading: Padding(
+                          padding: EdgeInsets.only(top: 15.0),
+                          child: Icon(
+                            Icons.book_rounded,
+                            size: 30,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Wrap(
+                      runSpacing: 5,
+                      children: List.generate(
+                        8,
+                        (index) => FlatButton(
+                          onPressed: () {},
+                          child: Text(bottomMenu[index]),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-              )
+              ),
             ],
           ),
-          const SizedBox(
-            width: 20,
-          ),
-          SizedBox(
-            width: 130,
-            height: 100,
-            child: Image.network(
-              postImage,
-              fit: BoxFit.cover,
-            ),
-          ),
+          // Center(
+          //   child: RaisedButton(
+          //     onPressed: () async {
+          //       await FirebaseService().signOut();
+          //     },
+          //     child: const Text('sign out'),
+          //   ),
+          // ),
         ],
       ),
     );
