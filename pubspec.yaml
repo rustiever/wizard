@@ -5,6 +5,7 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.7.0 <3.0.0"
 dependencies:
+  markdown_widget: 1.2.5
   get: 
   firebase_auth: 
   firebase_core: 
@@ -23,3 +24,4 @@ flutter:
 
   assets:
     - assets/pic1.jpg
+    - assets/README.md
