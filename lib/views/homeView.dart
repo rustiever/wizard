@@ -12,68 +12,12 @@ class HomeView extends StatelessWidget {
     "Terms",
     "About"
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffffffff),
-      appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: Colors.transparent,
-        automaticallyImplyLeading: false,
-        titleSpacing: 70,
-        title: const Text(
-          'Wizard',
-          textScaleFactor: 2,
-          style: TextStyle(
-              color: Colors.black,
-              // fontSize: 3,
-              letterSpacing: -1,
-              fontFamily: "Helvetica Neue"),
-        ),
-        actions: [
-          IconButton(
-              icon: const Icon(
-                Icons.search_sharp,
-                color: Color(0xff757575),
-                size: 25.0,
-              ),
-              padding: const EdgeInsets.all(15.0),
-              onPressed: () {}),
-          IconButton(
-              icon: const Icon(
-                Icons.bookmark_outline_rounded,
-                color: Color(0xff757575),
-                size: 25.0,
-              ),
-              padding: const EdgeInsets.all(15.0),
-              onPressed: () {}),
-          IconButton(
-              icon: const Icon(
-                Icons.notifications_on_outlined,
-                color: Color(0xff757575),
-                size: 25.0,
-              ),
-              padding: const EdgeInsets.all(15.0),
-              onPressed: () {}),
-          IconButton(
-              icon: const CircleAvatar(
-                // radius: 100.0,
-                backgroundColor: Colors.green,
-                child: Icon(
-                  Icons.person_outline_rounded,
-                  color: Color(0xff757575),
-                  size: 20.0,
-                ),
-              ),
-              padding: const EdgeInsets.fromLTRB(
-                10.0,
-                10.0,
-                50.0,
-                10.0,
-              ),
-              onPressed: () {}),
-        ],
-      ),
+      appBar: CustomAppBar(),
       body: ListView(
         children: [
           const SizedBox(
@@ -126,21 +70,21 @@ class HomeView extends StatelessWidget {
             height: 5,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 66.0),
+            padding: const EdgeInsets.only(left: 66.0, top: 20, bottom: 20),
             child: ListTile(
               title: const Text(
                 "TRENDING ON WIZARD",
                 style: TextStyle(
                     fontFamily: "Helvetica Neue",
-                    fontSize: 12,
+                    fontSize: 18,
                     fontWeight: FontWeight.w700),
               ),
               leading: CircleAvatar(
-                radius: 12,
+                radius: 18,
                 backgroundColor: Colors.grey[200],
                 child: const Icon(
                   Icons.stacked_line_chart_outlined,
-                  size: 20,
+                  // size: 20,
                   color: Color(0xff4ba97d),
                 ),
               ),
@@ -190,7 +134,7 @@ class HomeView extends StatelessWidget {
             height: 5,
           ),
           const SizedBox(
-            height: 50,
+            height: 70,
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
