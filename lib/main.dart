@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:get/get.dart';
 import 'package:markdown_widget/markdown_widget.dart';
+import 'package:mime_type/mime_type.dart';
 import 'package:wizard/constants.dart';
+import 'controllers/controllers.dart';
 import 'views/views.dart';
 import 'widgets/widgets.dart';
 
@@ -18,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: PostView(),
+      home: NewStoryView(),
     );
   }
 }
@@ -112,6 +117,53 @@ class ErrorView extends StatelessWidget {
     return const Scaffold(
       body: Center(
         child: Text('Error'),
+      ),
+    );
+  }
+}
+
+class NewStoryView extends StatelessWidget {
+  final c = Get.put(NewStoryController());
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: CustomAppBar(),
+      body: Column(
+        children: [
+          Container(
+            color: Colors.red,
+            height: 200,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Builder(
+                  builder: (context) => DropzoneView(
+                    operation: DragOperation.linkMove,
+                    cursor: CursorType.grab,
+                    onCreated: (ctrl) {
+                      NewStoryController.to.controller = ctrl;
+                    },
+                    onLoaded: () => print('Zone 1 loaded'),
+                    onError: (ev) => print('Zone 1 error: $ev'),
+                    onHover: () {
+                      // print('Zone 1 hovered');
+                    },
+                    onLeave: () {
+                      print('Zone 1 left');
+                    },
+                    onDrop: (ev) async {
+                      print('Zone 1 drop: ${ev.runtimeType}');
+                      print('Zone 1 drop: ${mime(ev.name as String)}');
+                      print(ascii.decode(await NewStoryController.to.controller
+                          .getFileData(ev)));
+                    },
+                  ),
+                ),
+                const Text('Drop markdown file only')
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

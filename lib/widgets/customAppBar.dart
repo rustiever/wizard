@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants.dart';
+
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   final Size preferredSize;
@@ -8,19 +10,6 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     Key key,
   })  : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);
-  final profileMenu = [
-    "New story",
-    "Stories",
-    "Stats",
-    "Design",
-    "Settings",
-    "Reading list",
-    "Publications",
-    "Customize your interests",
-    "Medium Partner Program",
-    "Help",
-    "Sign out"
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +71,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                   ),
                 )
                 .toList(),
+            onSelected: (value) {},
             padding: const EdgeInsets.fromLTRB(
               10.0,
               10.0,

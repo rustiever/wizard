@@ -2,6 +2,21 @@ import 'dart:ui';
 
 Color grey = const Color(0xff757575);
 
+const profileMenu = [
+  "New story",
+  "Stories",
+  "Stats",
+  "Design",
+  "Settings",
+  "Reading list",
+  "Publications",
+  "Customize your interests",
+  "Medium Partner Program",
+  "Help",
+  "Sign out"
+];
+
+const mimeMD = "text/x-web-markdown";
 String postImage =
         'https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
     authorName = 'Sharan',
