@@ -22,10 +22,10 @@ class NewStoryController extends GetxController {
   @override
   void onInit() {
     ever(fileData, (val) {
+      print(fileName.value);
       final data = utf8.decode(val as Uint8List);
       post = PostModel(
-          // uid: FirebaseService().currentUser.uid,
-          uid: 'll',
+          uid: FirebaseService().currentUser.uid,
           data: data,
           claps: 0,
           name: fileName.value);
@@ -35,9 +35,7 @@ class NewStoryController extends GetxController {
 
   void upload() {
     if (!post.isNull) {
-      print('jj');
-      // FirebaseService().uploadFile(post);
+      FirebaseService().uploadFile(post);
     }
-    print('jjk');
   }
 }

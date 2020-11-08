@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wizard/models/models.dart';
 
+import '../constants.dart';
+
 class FirebaseService {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-  String userCollection = 'users';
 
   User get currentUser => auth.currentUser;
   Stream<User> get authChange => auth.authStateChanges();
@@ -57,4 +57,8 @@ class FirebaseService {
       firestore.collection(userCollection).doc(userModel.uid).set(
             userModel.toJson(),
           );
+
+  Future<void> uploadFile(PostModel postModel) async {
+    await firestore.collection(postCollection).add(postModel.toJson());
+  }
 }

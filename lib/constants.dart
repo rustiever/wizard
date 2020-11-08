@@ -1,6 +1,16 @@
+import 'dart:math';
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
 Color grey = const Color(0xff757575);
+
+const ampImg = 'assets/Amp.png';
+
+const String userCollection = 'users';
+const String postCollection = 'posts';
+final MaterialColor randomColors =
+    Colors.primaries[Random().nextInt(Colors.primaries.length)];
 
 const profileMenu = [
   "New story",

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:wizard/services/firebaseServices.dart';
+import 'package:wizard/views/homeView.dart';
+import 'package:wizard/views/views.dart';
 
 import '../constants.dart';
 
@@ -8,7 +12,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
 
   CustomAppBar({
     Key key,
-  })  : preferredSize = const Size.fromHeight(kToolbarHeight),
+  })  : preferredSize = const Size.fromHeight(100),
         super(key: key);
 
   @override
@@ -71,7 +75,14 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                   ),
                 )
                 .toList(),
-            onSelected: (value) {},
+            onSelected: (String value) async {
+              if (value == profileMenu[0]) {
+                Get.toNamed('/${profileMenu[0]}');
+              } else if (value == profileMenu[10]) {
+                Get.offAll(IntroView());
+                await FirebaseService().signOut();
+              }
+            },
             padding: const EdgeInsets.fromLTRB(
               10.0,
               10.0,

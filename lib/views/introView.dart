@@ -11,7 +11,7 @@ class IntroView extends StatelessWidget {
     return StreamBuilder<User>(
       stream: FirebaseService().authChange,
       builder: (context, snapshot) {
-        if (snapshot.data == null) {
+        if (snapshot.hasData) {
           // return Center(
           //   child: RaisedButton(
           //     onPressed: () async {
@@ -46,12 +46,13 @@ class IntroView extends StatelessWidget {
                 child: const Text('Write'),
               ),
               FlatButton(
-                onPressed: () {
-                  Get.dialog(
+                onPressed: () async {
+                  await Get.dialog(
                     AuthWidget(
                       isSignUp: false,
                     ),
                   );
+                  Get.back();
                 },
                 child: const Text('Sign In'),
               ),
@@ -59,10 +60,11 @@ class IntroView extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(0.0, 10, 35, 10),
                 child: RaisedButton(
                   padding: const EdgeInsets.all(10.0),
-                  onPressed: () {
-                    Get.dialog(
+                  onPressed: () async {
+                    await Get.dialog(
                       AuthWidget(),
                     );
+                    Get.back();
                   },
                   color: const Color(0xff4ba97d),
                   child: const Text(
