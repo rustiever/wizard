@@ -3,8 +3,7 @@ import 'package:get/get.dart';
 import 'package:wizard/controllers/controllers.dart';
 import 'package:wizard/widgets/widgets.dart';
 
-class HomeView extends StatelessWidget {
-  final PostController _controller = Get.put(PostController());
+class HomeView extends GetView<PostController> {
   final bottomMenu = [
     "Help",
     "Status",

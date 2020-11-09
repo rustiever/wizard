@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wizard/controllers/controllers.dart';
 import 'package:wizard/services/firebaseServices.dart';
 import 'package:wizard/views/views.dart';
 import 'package:wizard/widgets/widgets.dart';
 
 class IntroView extends StatelessWidget {
+  final PostController controller = Get.put(PostController());
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User>(
