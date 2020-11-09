@@ -39,7 +39,9 @@ class FirebaseService {
   Future<void> signInWithEmailAndPassword(String email, String pass) async {
     try {
       await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: pass);
+          // .signInWithEmailAndPassword(email: email, password: pass);
+          .signInWithEmailAndPassword(
+              email: 'sdf@gm.in', password: 'Sharan@57');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
@@ -60,5 +62,20 @@ class FirebaseService {
 
   Future<void> uploadFile(PostModel postModel) async {
     await firestore.collection(postCollection).add(postModel.toJson());
+  }
+
+  Future<List<PostModel>> getTrendingPosts() async {
+    final List<QueryDocumentSnapshot> snapshots =
+        (await firestore.collection(postCollection).get()).docs;
+    print('trend here ${snapshots.first.data().entries}');
+    List<PostModel> posts;
+    for (final item in snapshots) {
+      posts.add(
+        PostModel.fromJson(
+          item.data(),
+        ),
+      );
+    }
+    return posts;
   }
 }

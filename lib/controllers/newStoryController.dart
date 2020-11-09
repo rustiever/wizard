@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'dart:typed_data';
-
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:get/get.dart';
 import 'package:wizard/models/postModel.dart';
@@ -23,10 +21,10 @@ class NewStoryController extends GetxController {
   void onInit() {
     ever(fileData, (val) {
       print(fileName.value);
-      final data = utf8.decode(val as Uint8List);
+      // final data = utf8.decode(val as Uint8List);
       post = PostModel(
           uid: FirebaseService().currentUser.uid,
-          data: data,
+          data: val as Uint8List,
           claps: 0,
           name: fileName.value);
     });

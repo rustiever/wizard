@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:wizard/controllers/controllers.dart';
 import 'package:wizard/widgets/widgets.dart';
 
 class HomeView extends StatelessWidget {
+  final PostController _controller = Get.put(PostController());
   final bottomMenu = [
     "Help",
     "Status",
@@ -15,6 +18,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // print(_controller.isNull);
     return Scaffold(
       backgroundColor: const Color(0xffffffff),
       appBar: CustomAppBar(),

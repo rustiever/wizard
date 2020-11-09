@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wizard/services/firebaseServices.dart';
-import 'package:wizard/views/homeView.dart';
 import 'package:wizard/views/views.dart';
 
 import '../constants.dart';
