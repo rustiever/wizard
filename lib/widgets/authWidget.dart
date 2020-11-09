@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wizard/controllers/authController.dart';
+import 'package:wizard/routes.dart';
 import 'package:wizard/services/firebaseServices.dart';
 
 class AuthWidget extends StatelessWidget {
@@ -129,7 +130,8 @@ class AuthWidget extends StatelessWidget {
                                 controller.name.text)
                             : await service.signInWithEmailAndPassword(
                                 controller.email.text, controller.pass.text);
-                        if (Get.isDialogOpen) Get.back();
+                        Get.back();
+                        Get.toNamed(homeRoute);
                       }
                     },
                     color: const Color(0xff4ba97d),

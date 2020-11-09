@@ -83,6 +83,35 @@ class NewStoryView extends StatelessWidget {
               ),
             ),
           ),
+          Align(
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 100),
+              child: RaisedButton(
+                onPressed: () => NewStoryController.to.upload(),
+                color: const Color(0xff4ba97d),
+                child: const Text(
+                  'Publish as Story',
+                  textScaleFactor: 1.1,
+                  style: TextStyle(
+                      // fontSize: 2,
+                      color: Colors.white,
+                      fontFamily: "Lucida Sans"),
+                ),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.topCenter,
+            child: Text(
+              'Please give title as fileName(even if it is too long, for space use underscore)',
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.grey[700],
+                  fontFamily: "Helvetica Neue",
+                  fontWeight: FontWeight.w400),
+            ),
+          ),
           Container(
             color: const Color(0xff4ba97d),
             width: 400,
@@ -110,44 +139,22 @@ class NewStoryView extends StatelessWidget {
           ),
           Positioned(
             bottom: -25,
-            child: Row(
-              children: [
-                Card(
-                  shadowColor: const Color(0xff4ba97d),
-                  margin: const EdgeInsets.only(bottom: 90),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Obx(
-                      () => Text(
-                        'Name: ${NewStoryController.to.fileName.value}',
-                        textScaleFactor: 1.2,
-                        style: const TextStyle(
-                            fontSize: 18,
-                            fontFamily: "Helvetica Neue",
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
+            child: Card(
+              shadowColor: const Color(0xff4ba97d),
+              margin: const EdgeInsets.only(bottom: 90),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Obx(
+                  () => Text(
+                    'Name: ${NewStoryController.to.fileName.value}',
+                    textScaleFactor: 1.2,
+                    style: const TextStyle(
+                        fontSize: 18,
+                        fontFamily: "Helvetica Neue",
+                        fontWeight: FontWeight.w400),
                   ),
                 ),
-                const SizedBox(
-                  width: 600,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 90),
-                  child: RaisedButton(
-                    onPressed: () => NewStoryController.to.upload(),
-                    color: const Color(0xff4ba97d),
-                    child: const Text(
-                      'Publish as Story',
-                      textScaleFactor: 1.1,
-                      style: TextStyle(
-                          // fontSize: 2,
-                          color: Colors.white,
-                          fontFamily: "Lucida Sans"),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
         ],

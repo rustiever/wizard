@@ -64,18 +64,10 @@ class FirebaseService {
     await firestore.collection(postCollection).add(postModel.toJson());
   }
 
-  Future<List<PostModel>> getTrendingPosts() async {
+  Future<List<QueryDocumentSnapshot>> getTrendingPosts() async {
     final List<QueryDocumentSnapshot> snapshots =
         (await firestore.collection(postCollection).get()).docs;
-    print('trend here ${snapshots.first.data().entries}');
-    List<PostModel> posts;
-    for (final item in snapshots) {
-      posts.add(
-        PostModel.fromJson(
-          item.data(),
-        ),
-      );
-    }
-    return posts;
+    print('trend here ${snapshots.first.data()['data']}');
+    return snapshots;
   }
 }

@@ -17,12 +17,12 @@ final List<GetPage> routes = [
   GetPage(
     name: homeRoute,
     page: () => HomeView(),
+    binding: BindingsBuilder.put(
+      () => PostController(),
+    ),
   ),
   GetPage(
     name: postRoute,
     page: () => PostView(),
-    binding: BindingsBuilder.put(
-      () => PostController(),
-    ),
   ),
 ];

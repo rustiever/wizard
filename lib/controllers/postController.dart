@@ -19,6 +19,12 @@ class PostController extends GetxController {
   }
 
   Future<void> getTrendingPosts() async {
-    trendingPosts.value = await _firebaseService.getTrendingPosts();
+    final snapshots = await _firebaseService.getTrendingPosts();
+    for (final item in snapshots) {
+      trendingPosts.add(
+        PostModel.fromJson(item.data()),
+      );
+    }
+    print(trendingPosts.length);
   }
 }
