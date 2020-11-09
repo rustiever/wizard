@@ -1,8 +1,10 @@
+import 'dart:math';
 import 'dart:typed_data';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:get/get.dart';
 import 'package:wizard/models/postModel.dart';
 import 'package:wizard/services/firebaseServices.dart';
+import 'package:intl/intl.dart';
 
 class NewStoryController extends GetxController {
   static NewStoryController get to => Get.find();
@@ -23,6 +25,8 @@ class NewStoryController extends GetxController {
       print(fileName.value);
       // final data = utf8.decode(val as Uint8List);
       post = PostModel(
+          finishTime: Random().nextInt(11) + 1,
+          date: DateFormat.MMMd().format(DateTime.now()),
           uid: FirebaseService().currentUser.uid,
           data: val as Uint8List,
           claps: 0,

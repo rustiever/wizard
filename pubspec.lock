@@ -267,7 +267,7 @@ packages:
       name: markdown_widget
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.5"
+    version: "1.2.6"
   matcher:
     dependency: transitive
     description:
@@ -391,7 +391,7 @@ packages:
       name: video_player
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.11.1+5"
+    version: "1.0.0"
   video_player_platform_interface:
     dependency: transitive
     description:
