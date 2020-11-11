@@ -79,7 +79,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                 Get.toNamed('/${profileMenu[0]}');
               } else if (value == profileMenu[10]) {
                 Get.offAll(IntroView());
-                await FirebaseService().signOut();
+                await FirebaseService.instance.signOut();
               }
             },
             padding: const EdgeInsets.fromLTRB(

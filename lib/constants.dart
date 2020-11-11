@@ -10,6 +10,8 @@ const ampImg = 'assets/Amp.png';
 const String userCollection = 'users';
 const String postCollection = 'posts';
 const String trendPostCollection = 'trends';
+const String recomondsCollection = 'recomonds';
+const String recentPostCollection = 'recents';
 
 final MaterialColor randomColors =
     Colors.primaries[Random().nextInt(Colors.primaries.length)];

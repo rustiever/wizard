@@ -17,7 +17,6 @@ class HomeView extends GetView<PostController> {
 
   @override
   Widget build(BuildContext context) {
-    // print(_controller.isNull);
     return Scaffold(
       backgroundColor: const Color(0xffffffff),
       appBar: CustomAppBar(),
@@ -34,37 +33,25 @@ class HomeView extends GetView<PostController> {
                 onTap: () {},
               ),
               const SizedBox(
-                height: 460,
+                height: 600,
                 child: VerticalDivider(
                   color: Colors.black,
                   thickness: 0.5,
                   width: 5,
                 ),
               ),
-              Column(
-                children: const [
-                  Post2(),
-                  Post2(),
-                  Post2(),
-                  Post2(),
-                ],
+              Try(
+                controller: controller,
               ),
               const SizedBox(
-                height: 460,
+                height: 600,
                 child: VerticalDivider(
                   color: Colors.black,
                   thickness: 0.5,
                   width: 5,
                 ),
               ),
-              Column(
-                children: const [
-                  Post2(),
-                  Post2(),
-                  Post2(),
-                  Post2(),
-                ],
-              ),
+              Try(controller: controller)
             ],
           ),
           const Divider(
@@ -93,44 +80,44 @@ class HomeView extends GetView<PostController> {
               ),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [
-                  Post2(
-                    number: '01',
-                  ),
-                  Post2(
-                    number: '02',
-                  )
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [
-                  Post2(
-                    number: '03',
-                  ),
-                  Post2(
-                    number: '04',
-                  )
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [
-                  Post2(
-                    number: '05',
-                  ),
-                  Post2(
-                    number: '06',
-                  )
-                ],
-              ),
-            ],
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //   children: [
+          //     Column(
+          //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //       children: const [
+          //         Post2(
+          //           number: '01',
+          //         ),
+          //         Post2(
+          //           number: '02',
+          //         )
+          //       ],
+          //     ),
+          //     Column(
+          //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //       children: const [
+          //         Post2(
+          //           number: '03',
+          //         ),
+          //         Post2(
+          //           number: '04',
+          //         )
+          //       ],
+          //     ),
+          //     Column(
+          //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //       children: const [
+          //         Post2(
+          //           number: '05',
+          //         ),
+          //         Post2(
+          //           number: '06',
+          //         )
+          //       ],
+          //     ),
+          //   ],
+          // ),
           const Divider(
             color: Colors.black,
             thickness: 0.5,
@@ -224,6 +211,44 @@ class HomeView extends GetView<PostController> {
           // ),
         ],
       ),
+    );
+  }
+}
+
+class Try extends StatelessWidget {
+  const Try({
+    Key key,
+    @required this.controller,
+  }) : super(key: key);
+
+  final PostController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () {
+        if (controller.trendingPosts.isEmpty) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        return Column(
+          children: [
+            Post2(
+              postModel: controller.trendingPosts[0],
+            ),
+            Post2(
+              postModel: controller.trendingPosts[0],
+            ),
+            Post2(
+              postModel: controller.trendingPosts[0],
+            ),
+            Post2(
+              postModel: controller.trendingPosts[0],
+            ),
+          ],
+        );
+      },
     );
   }
 }

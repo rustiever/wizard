@@ -104,7 +104,7 @@ class NewStoryView extends StatelessWidget {
           Align(
             alignment: Alignment.topCenter,
             child: Text(
-              'Please give title as fileName(even if it is too long, for space use underscore)',
+              'Please give title as fileName(max is 4-5 words, for space use underscore)',
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.grey[700],

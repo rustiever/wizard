@@ -6,7 +6,7 @@ import 'package:wizard/services/firebaseServices.dart';
 
 class AuthWidget extends StatelessWidget {
   final controller = Get.put(AuthController());
-  final service = FirebaseService();
+  final service = FirebaseService.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final bool isSignUp;
   AuthWidget({

@@ -1,11 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:markdown_widget/markdown_widget.dart';
+import 'package:wizard/models/postModel.dart';
 import 'package:wizard/widgets/widgets.dart';
 
-import '../constants.dart';
-
 class PostView extends StatelessWidget {
+  final PostModel postModel;
+
+  const PostView({Key key, @required this.postModel}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,16 +32,17 @@ class PostView extends StatelessWidget {
                 ListTile(
                   leading: CircleAvatar(
                     radius: 30,
-                    backgroundImage: NetworkImage(authorImage),
+                    backgroundImage: NetworkImage(postModel.authorImage),
                   ),
                   title: Text(
-                    authorName,
+                    postModel.authorName,
                     style: const TextStyle(
                         fontFamily: "Helvetica Neue",
                         fontSize: 14,
                         fontWeight: FontWeight.w400),
                   ),
-                  subtitle: Text('$date . $readTime min read'),
+                  subtitle: Text(
+                      '${postModel.date} . ${postModel.finishTime} min read'),
                   trailing: Wrap(
                     children: [
                       IconButton(
@@ -52,33 +56,30 @@ class PostView extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 6900,
-                  child: FutureBuilder<String>(
-                      future: rootBundle.loadString('assets/README.md'),
-                      builder: (context, snapshot) {
-                        if (!snapshot.hasData || snapshot.hasError) {
-                          return const Center(
-                              child: CircularProgressIndicator());
-                        }
-                        return MarkdownWidget(data: snapshot.data);
-                      }),
-                ),
-                SizedBox(
-                  height: 9800,
-                  child: FutureBuilder<String>(
-                    future: rootBundle.loadString('assets/README.md'),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData || snapshot.hasError) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                      return Column(
-                        children:
-                            MarkdownGenerator(data: snapshot.data).widgets,
-                      );
-                    },
+                Container(
+                  height: 600,
+                  child: MarkdownWidget(
+                    data: utf8.decode(postModel.data),
+                    loadingWidget: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   ),
-                )
+                ),
+                // SizedBox(
+                //   height: 9800,
+                //   child: FutureBuilder<String>(
+                //     future: rootBundle.loadString('assets/README.md'),
+                //     builder: (context, snapshot) {
+                //       if (!snapshot.hasData || snapshot.hasError) {
+                //         return const Center(child: CircularProgressIndicator());
+                //       }
+                //       return Column(
+                //         children:
+                //             MarkdownGenerator(data: snapshot.data).widgets,
+                //       );
+                //     },
+                //   ),
+                // )
               ],
             ),
           ),

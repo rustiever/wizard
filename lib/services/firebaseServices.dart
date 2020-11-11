@@ -5,10 +5,14 @@ import 'package:wizard/models/models.dart';
 import '../constants.dart';
 
 class FirebaseService {
+  FirebaseService._internal();
+  static final FirebaseService instance = FirebaseService._internal();
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  User get currentUser => auth.currentUser;
+  UserModel userModel;
+  UserModel get currentUser => userModel;
+  set currentUser(UserModel userModel) => this.userModel = userModel;
   Stream<User> get authChange => auth.authStateChanges();
 
   Future<void> createUserWithEmailAndPassword(
@@ -22,8 +26,14 @@ class FirebaseService {
           name: userCredential.user.displayName ?? name,
           uid: userCredential.user.uid,
           email: userCredential.user.email,
-          posts: [],
         ),
+      );
+      currentUser = UserModel.fromJson(
+        (await firestore
+                .collection(userCollection)
+                .doc(userCredential.user.uid)
+                .get())
+            .data(),
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -38,10 +48,19 @@ class FirebaseService {
 
   Future<void> signInWithEmailAndPassword(String email, String pass) async {
     try {
-      await FirebaseAuth.instance
+      final UserCredential userCredential = await FirebaseAuth.instance
           // .signInWithEmailAndPassword(email: email, password: pass);
           .signInWithEmailAndPassword(
               email: 'sdf@gm.in', password: 'Sharan@57');
+
+      currentUser = UserModel.fromJson(
+        (await firestore
+                .collection(userCollection)
+                .doc(userCredential.user.uid)
+                .get())
+            .data(),
+      );
+      print(userModel.uid);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
@@ -60,11 +79,24 @@ class FirebaseService {
             userModel.toJson(),
           );
 
-  Future<void> uploadFile(PostModel postModel) async {
-    await firestore.collection(postCollection).add(postModel.toJson());
-  }
+  Future<void> uploadFile(PostModel postModel) async =>
+      firestore.collection(postCollection).add(postModel.toJson());
 
   Future<List<QueryDocumentSnapshot>> getTrendingPosts() async {
+    final List<QueryDocumentSnapshot> snapshots =
+        (await firestore.collection(postCollection).get()).docs;
+    print('trend here ${snapshots.first.data()['data']}');
+    return snapshots;
+  }
+
+  Future<List<QueryDocumentSnapshot>> getRecomondsPosts() async {
+    final List<QueryDocumentSnapshot> snapshots =
+        (await firestore.collection(postCollection).get()).docs;
+    print('trend here ${snapshots.first.data()['data']}');
+    return snapshots;
+  }
+
+  Future<List<QueryDocumentSnapshot>> getRecentsPosts() async {
     final List<QueryDocumentSnapshot> snapshots =
         (await firestore.collection(postCollection).get()).docs;
     print('trend here ${snapshots.first.data()['data']}');

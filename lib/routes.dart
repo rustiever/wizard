@@ -21,8 +21,8 @@ final List<GetPage> routes = [
       () => PostController(),
     ),
   ),
-  GetPage(
-    name: postRoute,
-    page: () => PostView(),
-  ),
+  // GetPage(
+  //   name: postRoute,
+  //   page: () => PostView(),
+  // ),
 ];
