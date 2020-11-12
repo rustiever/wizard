@@ -85,21 +85,7 @@ class FirebaseService {
   Future<List<QueryDocumentSnapshot>> getTrendingPosts() async {
     final List<QueryDocumentSnapshot> snapshots =
         (await firestore.collection(postCollection).get()).docs;
-    print('trend here ${snapshots.first.data()['data']}');
-    return snapshots;
-  }
-
-  Future<List<QueryDocumentSnapshot>> getRecomondsPosts() async {
-    final List<QueryDocumentSnapshot> snapshots =
-        (await firestore.collection(postCollection).get()).docs;
-    print('trend here ${snapshots.first.data()['data']}');
-    return snapshots;
-  }
-
-  Future<List<QueryDocumentSnapshot>> getRecentsPosts() async {
-    final List<QueryDocumentSnapshot> snapshots =
-        (await firestore.collection(postCollection).get()).docs;
-    print('trend here ${snapshots.first.data()['data']}');
+    // print('trend here ${snapshots.first.data()['data']}');
     return snapshots;
   }
 }

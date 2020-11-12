@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
@@ -40,17 +41,31 @@ class NewStoryView extends StatelessWidget {
                   onDrop: (ev) async {
                     if (mime(ev.name as String) == mimeMD) {
                       // change if possible
-                      NewStoryController.to.fileData.value =
-                          await NewStoryController.to.controller
-                              .getFileData(ev);
+                      // NewStoryController.to.fileData.assignAll(
+                      //   await NewStoryController.to.controller.getFileData(ev),
+                      // );
+                      final List rr = await NewStoryController.to.controller
+                          .getFileData(ev);
+                      final List<int> rs = List.from(rr);
+                      NewStoryController.to.fileData.assignAll(rs);
                       NewStoryController.to.fileName.value = ev.name as String;
-                      print(await NewStoryController.to.controller
-                          .getFilename(ev));
-                      print(NewStoryController.to.fileName.value);
+                      final df = utf8.decode(
+                        await NewStoryController.to.controller.getFileData(ev),
+                      );
+                      // print(
+                      //   df
+                      //       .substring(
+                      //           df.indexOf('<--') + 3, df.indexOf("-->") - 1)
+                      //       .trim(),
+                      // );
+                      NewStoryController.to.title.value = df
+                          .substring(
+                              df.indexOf('<--') + 3, df.indexOf("-->") - 1)
+                          .trim();
                     } else {
                       Get.snackbar('invalid', '',
                           titleText: const Text('Invalid'));
-                      print('no file');
+                      print('Invalid file');
                     }
                   },
                 ),
@@ -77,7 +92,7 @@ class NewStoryView extends StatelessWidget {
                     allowedExtensions: ['md'],
                     type: FileType.custom,
                   );
-                  NewStoryController.to.fileData.value = res.files[0].bytes;
+                  NewStoryController.to.fileData.assignAll(res.files[0].bytes);
                   NewStoryController.to.fileName.value = res.files[0].name;
                 },
               ),

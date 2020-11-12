@@ -1,6 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:markdown_widget/markdown_widget.dart';
 import 'package:wizard/models/postModel.dart';
 import 'package:wizard/widgets/widgets.dart';
@@ -56,30 +55,35 @@ class PostView extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
-                  height: 600,
-                  child: MarkdownWidget(
-                    data: utf8.decode(postModel.data),
-                    loadingWidget: const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  ),
-                ),
                 // SizedBox(
-                //   height: 9800,
-                //   child: FutureBuilder<String>(
-                //     future: rootBundle.loadString('assets/README.md'),
-                //     builder: (context, snapshot) {
-                //       if (!snapshot.hasData || snapshot.hasError) {
-                //         return const Center(child: CircularProgressIndicator());
-                //       }
-                //       return Column(
-                //         children:
-                //             MarkdownGenerator(data: snapshot.data).widgets,
-                //       );
-                //     },
+                //   height: 600,
+                //   child: MarkdownWidget(
+                //     data: utf8.decode(postModel.data),
+                //     loadingWidget: const Center(
+                //       child: CircularProgressIndicator(),
+                //     ),
                 //   ),
-                // )
+                // ),
+                SizedBox(
+                  height: 500,
+                  child: FutureBuilder<String>(
+                    future: rootBundle.loadString('assets/kl.md'),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData || snapshot.hasError) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      return Column(
+                        children: [
+                          Center(
+                            child: MarkdownGenerator(data: snapshot.data)
+                                .widgets
+                                .last,
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                )
               ],
             ),
           ),

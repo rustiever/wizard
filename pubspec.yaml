@@ -4,6 +4,8 @@ publish_to: 'none'
 version: 1.0.0+1
 environment:
   sdk: ">=2.7.0 <3.0.0"
+
+
 dependencies:
   get: 3.16.1
   mime_type: 0.3.2

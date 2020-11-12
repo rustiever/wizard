@@ -5,8 +5,7 @@ import 'package:wizard/services/firebaseServices.dart';
 class PostController extends GetxController {
   FirebaseService _firebaseService;
   RxList<PostModel> trendingPosts = <PostModel>[].obs;
-  RxList<PostModel> recomondsPosts = <PostModel>[].obs;
-  RxList<PostModel> recentPosts = <PostModel>[].obs;
+
 // @override
   // void onClose() {
   //   // TODO: implement onClose
@@ -17,8 +16,6 @@ class PostController extends GetxController {
   void onInit() {
     _firebaseService = FirebaseService.instance;
     _getTrendingPosts();
-    _getRecomondsPosts();
-    _getRecentPosts();
     super.onInit();
   }
 
@@ -31,27 +28,5 @@ class PostController extends GetxController {
     }
     print(trendingPosts.length);
     trendingPosts.shuffle();
-  }
-
-  Future<void> _getRecomondsPosts() async {
-    final snapshots = await _firebaseService.getRecomondsPosts();
-    for (final item in snapshots) {
-      recomondsPosts.add(
-        PostModel.fromJson(item.data()),
-      );
-    }
-    print(recomondsPosts.length);
-    recomondsPosts.shuffle();
-  }
-
-  Future<void> _getRecentPosts() async {
-    final snapshots = await _firebaseService.getRecentsPosts();
-    for (final item in snapshots) {
-      recentPosts.add(
-        PostModel.fromJson(item.data()),
-      );
-    }
-    print(recentPosts.length);
-    recentPosts.shuffle();
   }
 }

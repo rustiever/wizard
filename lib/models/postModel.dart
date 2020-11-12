@@ -10,6 +10,7 @@ class PostModel {
     @required this.authorName,
     @required this.authorImage,
     @required this.title,
+    @required this.fileName,
     // @required this.postImage
   });
 
@@ -21,6 +22,7 @@ class PostModel {
   String title;
   String authorName;
   String authorImage;
+  String fileName;
   // String postImage;
 
   factory PostModel.fromJson(Map<String, dynamic> json) => PostModel(
@@ -38,6 +40,7 @@ class PostModel {
         title: json["title"] == null ? null : json["title"] as String,
         authorImage:
             json["authorImage"] == null ? null : json["authorImage"] as String,
+        fileName: json["fileName"] as String,
         // postImage:  json["postImage"] as String
       );
 
@@ -50,6 +53,7 @@ class PostModel {
         "authorName": authorName,
         "title": title,
         "authorImage": authorImage,
+        "fileName": fileName
         // "postImage":postImage
       };
 }
