@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:markdown_widget/markdown_widget.dart';
@@ -10,6 +12,13 @@ class PostView extends StatelessWidget {
   const PostView({Key key, @required this.postModel}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final List<Widget> post = MarkdownGenerator(
+      data: utf8.decode(
+        postModel.data,
+      ),
+    ).widgets;
+    post.removeAt(1);
+
     return Scaffold(
       appBar: CustomAppBar(),
       body: Center(
@@ -21,9 +30,10 @@ class PostView extends StatelessWidget {
             ),
             child: ListView(
               children: [
-                const Text(
-                  "Flutter Forms Validation — the Ultimate Guide",
-                  style: TextStyle(
+                Text(
+                  // "Flutter Forms Validation — the Ultimate Guide",
+                  postModel.title,
+                  style: const TextStyle(
                       fontFamily: "Times New Roman",
                       fontSize: 48,
                       fontWeight: FontWeight.w400),
@@ -66,24 +76,48 @@ class PostView extends StatelessWidget {
                 // ),
                 SizedBox(
                   height: 500,
-                  child: FutureBuilder<String>(
-                    future: rootBundle.loadString('assets/kl.md'),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData || snapshot.hasError) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                      return Column(
-                        children: [
-                          Center(
-                            child: MarkdownGenerator(data: snapshot.data)
-                                .widgets
-                                .last,
-                          ),
-                        ],
-                      );
-                    },
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: post,
                   ),
-                )
+                  // child: FutureBuilder<String>(
+                  //   future: rootBundle.loadString('assets/kl.md'),
+                  //   builder: (context, snapshot) {
+                  //     if (!snapshot.hasData || snapshot.hasError) {
+                  //       return const Center(child: CircularProgressIndicator());
+                  //     }
+                  //     return Column(
+                  //       children: [
+                  //         Center(
+                  //           child: MarkdownGenerator(data: snapshot.data)
+                  //               .widgets
+                  //               .last,
+                  //         ),
+                  //       ],
+                  //     );
+                  //   },
+                  // ),
+                ),
+                // SizedBox(
+                //   height: 500,
+                //   child: FutureBuilder<String>(
+                //     future: rootBundle.loadString('assets/kl.md'),
+                //     builder: (context, snapshot) {
+                //       if (!snapshot.hasData || snapshot.hasError) {
+                //         return const Center(child: CircularProgressIndicator());
+                //       }
+                //       return Column(
+                //         children: [
+                //           Center(
+                //             child: MarkdownGenerator(data: snapshot.data)
+                //                 .widgets
+                //                 .last,
+                //           ),
+                //         ],
+                //       );
+                //     },
+                //   ),
+                // )
               ],
             ),
           ),

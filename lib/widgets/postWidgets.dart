@@ -277,31 +277,14 @@ class Post2 extends StatelessWidget {
           const SizedBox(
             width: 20,
           ),
-          Column(
-            children: [
-              SizedBox(
-                width: 130,
-                height: 100,
-                child: MarkdownWidget(
-                  shrinkWrap: true,
-                  childMargin: const EdgeInsets.all(8.0),
-                  data: utf8.decode(postModel.data),
-                  loadingWidget: const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
+          SizedBox(
+            width: 130,
+            height: 100,
+            child: MarkdownGenerator(
+              data: utf8.decode(
+                postModel.data,
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(
-                'Preview',
-                style: TextStyle(
-                    color: Colors.grey,
-                    fontFamily: "Helvetica Neue",
-                    fontSize: 13),
-              )
-            ],
+            ).widgets.first,
           ),
 
           // SizedBox(

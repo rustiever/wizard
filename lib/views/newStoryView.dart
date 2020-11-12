@@ -116,17 +116,6 @@ class NewStoryView extends StatelessWidget {
               ),
             ),
           ),
-          Align(
-            alignment: Alignment.topCenter,
-            child: Text(
-              'Please give title as fileName(max is 4-5 words, for space use underscore)',
-              style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.grey[700],
-                  fontFamily: "Helvetica Neue",
-                  fontWeight: FontWeight.w400),
-            ),
-          ),
           Container(
             color: const Color(0xff4ba97d),
             width: 400,

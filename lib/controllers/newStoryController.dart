@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:math';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:get/get.dart';
