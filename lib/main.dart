@@ -16,7 +16,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       getPages: routes,
-      home: IntroView(),
+      home: PostView(
+        postModel: null,
+      ),
     );
   }
 }

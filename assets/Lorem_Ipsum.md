@@ -1,23 +1,18 @@
+# 15 better Lorem Ipsum generators
 ![lorem ipsum genrator](https://res.cloudinary.com/practicaldev/image/fetch/s--pzWwDRum--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/i/ekd0lex9efmks8orb7yh.jpg)
 
-<-- 15 better Lorem Ipsum generators -->
-
 ###### Honestly, who doesn't love Lorem Ipsum generators?
+ They are pieces of Latin text we can use in design mockups or beta applications.
+ It helps to give the application a more real-life look.
+ Lorem Ipsum has been the industries standard replacement text for about ever, it's Latin that can easily be copied along multiple lines.
+ Nothing wrong with the original one, but if you want to spice things up a little bit, here are 15 super cool alternatives you can use.
 
-###### They are pieces of Latin text we can use in design mockups or beta applications.
-
-###### It helps to give the application a more real-life look.
-
-###### Lorem Ipsum has been the industries standard replacement text for about ever, it's Latin that can easily be copied along multiple lines.
-
-###### Nothing wrong with the original one, but if you want to spice things up a little bit, here are 15 super cool alternatives you can use.
-
-###### See below the original Lorem Ipsum.
+ See below the original Lorem Ipsum.
 
 >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ipsum ipsum, laoreet maximus tortor sed, eleifend ultricies nulla. Aliquam odio est, efficitur in urna eget, fringilla molestie metus. Aenean tortor risus, pellentesque at diam at, mollis euismod sapien. Praesent sed eleifend ligula. Suspendisse eget ex orci.
 
 
-# 1. Pirate Ipsum
+1. Pirate Ipsum
 
 Argh, who doesn't want to read a pirate line every now and then, superb Ipsum text based on the around cool pirates.
 
@@ -25,38 +20,34 @@ Argh, who doesn't want to read a pirate line every now and then, superb Ipsum te
 
 [Use Pirate Ipsum](https://pirateipsum.me/)
 
-# 2. Online Dating Ipsum
+2. Online Dating Ipsum
 
 I love this one, all the crazy dating talk in one generator, the person who made this should receive a medal.
 
 >Woody Allen only looking for something casual outdoorsy Netflix. Listening to music going to shows Murakami but then it wouldn't be private Catcher in the Rye, grab coffee or a drink I'm a big fan of ask me anything Kurosawa I hate lists. Beach days making lasagna from scratch jazz cafes I don't take myself too seriously degree in philosophy Vampire Weekend.
 
 [Use Online Dating Ipsum](https://laurenhallden.com/datingipsum/)
-
-# 3. Samuel L. Jackson Ipsum
+ 3. Samuel L. Jackson Ipsum
 
 Who doesn't like a good rage speech from Samuel L. Jackson, now in the confined space of Lorem Ipsum like generator paragraphs!
 >Now that there is the Tec-9, a crappy spray gun from South Miami. This gun is advertised as the most popular gun in American crime. Do you believe that shit? It actually says that in the little book that comes with it: the most popular gun in American crime. Like they're actually proud of that shit.
 
 [Use Samuel L. Jackson Ipsum](https://slipsum.com/)
-
-# 4. Zombie Ipsum
+## 4. Zombie Ipsum
 
 Big Zombie/Walking dead fan? Then this is your Ipsum generator, based on some apocalyptic zombie words this will get you a thrillingly good copy!
 
 >Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata corpora quaeritis. Summus brains sit​​, morbo vel maleficia? De apocalypsi gorger omero undead survivor dictum mauris. Hi mindless mortuis soulless creaturas, imo evil stalking monstra adventus resi dentevil vultus comedat cerebella viventium.
 
 [Use Zombie Ipsum](http://www.zombieipsum.com/)
-
-# 5. Cat Ipsum
+## 5. Cat Ipsum
 
 Sometimes you just need some cats in your life to mess things up and be spoiled animals. This Ipsum generator does just that for you!
 
 >Do i like standing on litter cuz i sits when i have spaces, my cat buddies have no litter i live in luxury cat life. Run up and down stairs hunt anything that moves. Attack the dog then pretend like nothing happened be superior.
 
 [Use Cat Ipsum](http://www.catipsum.com/)
-
-# 6. Legal Ipsum
+## 6. Legal Ipsum
 
 No money to hire an actual legal person to write your privacy policy? Just copy-paste some of these paragraphs onto your policy and BAM, nobody reads that stuff anyway... 🤔
 
@@ -64,15 +55,14 @@ No money to hire an actual legal person to write your privacy policy? Just copy-
 
 
 [Use Legal Ipsum](http://legalipsum.com/?count=1)
-
-# 7. Fillerama Ipsum
+## 7. Fillerama Ipsum
 
 Really cool Futurama based ipsum generator, it even comes with Headers and lists if you want!
 
 >And why did 'I' have to take a cab? Ooh, name it after me! You guys go on without me! I'm going to go… look for more stuff to steal! We need rest. The spirit is willing, but the flesh is spongy and bruised.
 
 [Use Pirate Ipsum](https://pirateipsum.me/)
-# 8. Hipster Ipsum
+## 8. Hipster Ipsum
 
 Maybe your audience is more the hipster kind?
 Then this generator is for you, get some cool sounding hipster words (to me it still sounds Latin).
@@ -82,7 +72,7 @@ Then this generator is for you, get some cool sounding hipster words (to me it s
 [Use Hipster Ipsum](https://hipsum.co/?paras=5&type=hipster-centric&start-with-lorem=1)
 
 
-# 9. Malevole Ipsum
+## 9. Malevole Ipsum
 
 A super cool AI-powered Ipsum generator based on a random mix of TV shows theme lyrics!
 
@@ -90,7 +80,7 @@ A super cool AI-powered Ipsum generator based on a random mix of TV shows theme 
 
 [Use Malevole Ipsum](https://vole.wtf/text-generator/)
 
-# 10. Trollem Ipsum
+##  10. Trollem Ipsum
 
 Ever needed to troll someone, but didn't really have a good comeback or line?
 This generator will create some amazing trolls based on your preferences.
@@ -98,7 +88,7 @@ This generator will create some amazing trolls based on your preferences.
 >User experience sucks besides so-called “iPad killer” who pleasure to use, when Android geek, what gorgeous so as to iCloud as a result delay in getting Ice Cream Sandwich.
 
 [Use Trollem Ipsum](http://trollemipsum.appspot.com/)
-# 11. PokéIpsum
+## 11. PokéIpsum
 
 Does who know me well, yes I'm a big Pokémon fan, and this generator is being used well. Also check out their website, some cool FAQs on there!
 
@@ -106,28 +96,28 @@ Does who know me well, yes I'm a big Pokémon fan, and this generator is being u
 
 [Use Poké Ipsum](https://pokemipsum.com/)
 
-# 12. Obama Ipsum
+## 12. Obama Ipsum
 
 Yeah, all this presidential stuff is getting to me, so let's pay our respect to the best president the USA ever had!
 
 >We need to heed the biblical call to care for "the least of these" and lift the poor out of despair. We are taking concrete actions to change course. But we have a responsibility to join together on behalf of the world we seek
 
 [Use Obama Ipsum](https://obamaipsum.com/)
-# 13. Corporate Ipsum
+## 13. Corporate Ipsum
 
 Maybe your company is requiring even your designs to rank high on SEO, better use this Corporate ipsum in case it might go live.
 
 >Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.
 
 [Use Corporate Ipsum](https://www.cipsum.com/)
-# 14. Delorean Ipsum
+## 14. Delorean Ipsum
 
 Because who doesn't love back to the future? Get cracking with doc and Marty and flip our some amazing lines of text with this cool generator.
 
 >Yeah, it's 8:00. I don't know, but I'm gonna find out. Are you sure about this storm? It's a board with wheels. You know Marty, you look so familiar, do I know your mother?
 
 [Use Obama Ipsum](https://satoristudio.net/delorean-ipsum/)
-# 15. Hodor Ipsum
+## 15. Hodor Ipsum
 
 HODOR!
 
