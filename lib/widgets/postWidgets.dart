@@ -284,7 +284,7 @@ class Post2 extends StatelessWidget {
               data: utf8.decode(
                 postModel.data,
               ),
-            ).widgets.first,
+            ).widgets[1],
           ),
 
           // SizedBox(

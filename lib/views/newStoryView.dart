@@ -1,16 +1,13 @@
 import 'dart:convert';
-import 'dart:ui';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
-
 import 'package:get/get.dart';
 import 'package:markdown_widget/markdown_widget.dart';
 import 'package:mime_type/mime_type.dart';
 import 'package:wizard/controllers/controllers.dart';
 import 'package:wizard/widgets/widgets.dart';
-
 import '../constants.dart';
 
 class NewStoryView extends StatelessWidget {

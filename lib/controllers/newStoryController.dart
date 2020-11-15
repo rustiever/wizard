@@ -28,10 +28,6 @@ class NewStoryController extends GetxController {
     ever(
       fileData,
       (val) {
-        // final data = utf8.decode(val as List<int>);
-        // final title = data
-        //     .substring(data.indexOf('<--') + 3, data.indexOf("-->") - 1)
-        //     .trim();
         print(title.value);
         print(fileName.value);
       },
@@ -56,6 +52,9 @@ class NewStoryController extends GetxController {
           fileName: fileName.value,
           title: title.value);
       _firebaseService.uploadFile(post);
+
+      preview.value = previewMe.value = false;
+      fileName.value = '';
     }
   }
 }
