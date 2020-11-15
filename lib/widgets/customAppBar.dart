@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wizard/routes.dart';
 import 'package:wizard/services/firebaseServices.dart';
 import 'package:wizard/views/views.dart';
 
@@ -11,7 +12,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
 
   CustomAppBar({
     Key key,
-  })  : preferredSize = const Size.fromHeight(100),
+  })  : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);
 
   @override
@@ -21,14 +22,17 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       backgroundColor: Colors.transparent,
       automaticallyImplyLeading: false,
       titleSpacing: 70,
-      title: const Text(
-        'Wizard',
-        textScaleFactor: 2,
-        style: TextStyle(
-            color: Colors.black,
-            // fontSize: 3,
-            letterSpacing: -1,
-            fontFamily: "Helvetica Neue"),
+      title: GestureDetector(
+        onTap: () => Get.offAllNamed(homeRoute),
+        child: const Text(
+          'Wizard',
+          textScaleFactor: 2,
+          style: TextStyle(
+              color: Colors.black,
+              // fontSize: 3,
+              letterSpacing: -1,
+              fontFamily: "Helvetica Neue"),
+        ),
       ),
       actions: [
         IconButton(

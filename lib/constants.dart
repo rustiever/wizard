@@ -25,7 +25,7 @@ const profileMenu = [
   "Reading list",
   "Publications",
   "Customize your interests",
-  "Medium Partner Program",
+  "Wizard Partner Program",
   "Help",
   "Sign out"
 ];

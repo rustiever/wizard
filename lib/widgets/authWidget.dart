@@ -145,7 +145,7 @@ class AuthWidget extends StatelessWidget {
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 90),
                       child: Text(
-                        "Click “Sign Up” to agree to Medium’s Terms of Service and acknowledge that Medium’s Privacy Policy applies to you.",
+                        "Click “Sign Up” to agree to Wizard’s Terms of Service and acknowledge that Medium’s Privacy Policy applies to you.",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontFamily: "Helvetica Neue",

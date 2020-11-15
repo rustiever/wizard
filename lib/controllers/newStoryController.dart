@@ -7,6 +7,8 @@ import 'package:intl/intl.dart';
 
 class NewStoryController extends GetxController {
   static NewStoryController get to => Get.find();
+  final preview = false.obs;
+  final previewMe = false.obs;
   DropzoneViewController controller;
   RxString fileName = ''.obs;
   RxString title = ''.obs;
