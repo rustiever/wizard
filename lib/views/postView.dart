@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
@@ -15,107 +14,19 @@ class PostView extends StatelessWidget {
   final PostController controller = Get.put(PostController());
   @override
   Widget build(BuildContext context) {
-    // final List<Widget> post = MarkdownGenerator(
-    //   styleConfig: StyleConfig(),
-    //   data: utf8.decode(
-    //     postModel.data,
-    //   ),
-    // ).widgets;
-    // post.removeAt(1);
-
-//     return Scaffold(
-//       appBar: CustomAppBar(),
-//       body: Center(
-//         child: SizedBox(
-//           width: 850,
-//           child: Padding(
-//             padding: const EdgeInsets.only(
-//               top: 40.0,
-//             ),
-//             child: ListView(
-//               children: [
-
-//                 SizedBox(
-//                   height: 700,
-//                   // child: ListView(
-//                   //   shrinkWrap: true,
-//                   //   children: post,
-//                   // ),
-//                   child: FutureBuilder<String>(
-//                     future: rootBundle.loadString('assets/Lorem_Ipsum.md'),
-//                     builder: (context, snapshot) {
-//                       if (!snapshot.hasData || snapshot.hasError) {
-//                         return const Center(child: CircularProgressIndicator());
-//                       }
-//                       const pinkAccent = Colors.pinkAccent;
-//                       return Center(
-//                         child: MarkdownWidget(
-//                             controller: controller.tocController,
-//                             data: snapshot.data,
-//                             styleConfig: StyleConfig(
-//                               pConfig: PConfig(
-//                                   linkGesture: (linkChild, url) {
-//                                     return GestureDetector(
-//                                       onTap: () => controller.launchURL(url),
-//                                       child: linkChild,
-//                                     );
-//                                   },
-//                                   selectable: false),
-//                               preConfig: PreConfig(
-//                                   preWrapper: (child, text) => CodeBlock(
-//                                         text: text,
-//                                         child: child,
-//                                       )),
-//                               tableConfig: TableConfig(
-//                                 defaultColumnWidth: const FixedColumnWidth(50),
-//                                 headChildWrapper: (child) => Container(
-//                                   margin: const EdgeInsets.all(10.0),
-//                                   alignment: Alignment.center,
-//                                   child: child,
-//                                 ),
-//                                 bodyChildWrapper: (child) => Container(
-//                                   margin: const EdgeInsets.all(10.0),
-//                                   alignment: Alignment.center,
-//                                   child: child,
-//                                 ),
-//                               ),
-//                               titleConfig: TitleConfig(
-//                                 commonStyle: const TextStyle(
-//                                   fontFamily: "Times New Roman",
-//                                   fontSize: 21
-//                                 ),
-//                                 divider: const Divider(),
-//                                 h1: const TextStyle(
-//                                     fontSize: 48,
-//                                     fontWeight: FontWeight.w400),
-//                               ),
-//                               hrConfig: HrConfig(color: pinkAccent,height: 10),
-//                               olConfig: OlConfig(textStyle: const TextStyle(
-// fontWeight: FontWeight.bold
-//                               ),)
-//                             ),
-//                             widgetConfig: WidgetConfig(),),
-//                       );
-//                     },
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
     return Scaffold(
       appBar: CustomAppBar(),
       body: Row(
         children: [
           Expanded(
-            flex: 2,
             child: Column(),
           ),
           Expanded(
             flex: 6,
             child: MarkdownPage(postModel: postModel),
+          ),
+          Expanded(
+            child: Column(),
           ),
         ],
       ),
@@ -123,7 +34,7 @@ class PostView extends StatelessWidget {
   }
 }
 
-class MarkdownPage extends StatelessWidget {
+class MarkdownPage extends GetView<PostController> {
   const MarkdownPage({
     Key key,
     @required this.postModel,
@@ -135,7 +46,18 @@ class MarkdownPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Markdown(
       data: utf8.decode(postModel.data),
+      selectable: true,
+      onTapLink: (text, href, title) => controller.launchURL(href),
       styleSheet: MarkdownStyleSheet(
+        h1Align: WrapAlignment.center,
+        h1: const TextStyle(
+            fontFamily: "Times New Roman",
+            fontSize: 48,
+            fontWeight: FontWeight.w400),
+        h2: const TextStyle(
+            fontFamily: "Times New Roman",
+            fontSize: 36,
+            fontWeight: FontWeight.w400),
         p: const TextStyle(
             fontFamily: "Times New Roman",
             fontSize: 21,

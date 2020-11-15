@@ -29,9 +29,14 @@ class HomeView extends GetView<PostController> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Post1(
-                onTap: () {},
-              ),
+              Obx(() {
+                if (controller.trendingPosts.isEmpty) {
+                  return CustomProgressIndicator();
+                }
+                return Post1(
+                  postModel: controller.trendingPosts[0],
+                );
+              }),
               const SizedBox(
                 height: 600,
                 child: VerticalDivider(

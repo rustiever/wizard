@@ -5,4 +5,5 @@ export 'customChoiceChip.dart';
 export 'getStartedButton.dart';
 export 'introPageFlatButton.dart';
 export 'postWidgets.dart';
+export 'progressIndicator.dart';
 export 'toastWidget.dart';

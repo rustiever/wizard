@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:markdown_widget/markdown_widget.dart';
@@ -16,7 +15,16 @@ class Post1 extends StatelessWidget {
       readTime,
       community;
 
-  final void Function() onTap;
+  final PostModel postModel;
+  // final void Function() onTap;
+
+  void onTap() {
+    Get.to(
+      PostView(
+        postModel: postModel,
+      ),
+    );
+  }
 
   const Post1(
       {Key key,
@@ -26,11 +34,10 @@ class Post1 extends StatelessWidget {
       this.authorImage =
           'https://images.unsplash.com/photo-1504593811423-6dd665756598?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
       this.title = 'Title of this title of this title',
-      this.content =
-          'In this article, we will draw a curved dashed in Flutter.',
+      this.content = 'To read more tap on the article',
       this.readTime = '5',
       this.community = 'Flutter Community',
-      this.onTap})
+      this.postModel})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -45,13 +52,13 @@ class Post1 extends StatelessWidget {
             GestureDetector(
               onTap: onTap,
               child: SizedBox(
-                height: 260,
-                width: 360,
-                child: Image.network(
-                  postImage,
-                  fit: BoxFit.cover,
-                ),
-              ),
+                  height: 260,
+                  width: 360,
+                  child: MarkdownGenerator(
+                    data: utf8.decode(
+                      postModel.data,
+                    ),
+                  ).widgets[1]),
             ),
             const SizedBox(
               height: 15,
@@ -59,13 +66,33 @@ class Post1 extends StatelessWidget {
             Row(
               children: [
                 CircleAvatar(
-                  backgroundImage: NetworkImage(authorImage),
+                  backgroundImage: NetworkImage(postModel.authorImage),
                   radius: 12.0,
                 ),
                 const SizedBox(
                   width: 10,
                 ),
-                Text(authorName)
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: postModel.authorName,
+                        style: const TextStyle(
+                            fontFamily: "Helvetica Neue", color: Colors.black),
+                      ),
+                      const TextSpan(
+                        text: ' in ',
+                        style: TextStyle(
+                            fontFamily: "Helvetica Neue", color: Colors.grey),
+                      ),
+                      TextSpan(
+                        text: community,
+                        style: const TextStyle(
+                            fontFamily: "Helvetica Neue", color: Colors.black),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
             const SizedBox(
@@ -74,7 +101,7 @@ class Post1 extends StatelessWidget {
             GestureDetector(
               onTap: onTap,
               child: Text(
-                title,
+                postModel.title,
                 style: const TextStyle(
                     fontFamily: "Helvetica Neue",
                     fontSize: 22,
@@ -103,7 +130,7 @@ class Post1 extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    'Read More . $readTime min read ',
+                    'Read More . ${postModel.finishTime} min read ',
                     style: const TextStyle(
                         color: Colors.grey,
                         fontFamily: "Helvetica Neue",
