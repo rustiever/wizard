@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wizard/widgets/widgets.dart';
@@ -35,7 +36,6 @@ class IntroView extends StatelessWidget {
                   isSignUp: false,
                 ),
               );
-              // Get.back();
             },
             child: const Text('Sign In'),
           ),
@@ -47,7 +47,6 @@ class IntroView extends StatelessWidget {
                 await Get.dialog(
                   AuthWidget(),
                 );
-                // Get.back();
               },
               color: const Color(0xff4ba97d),
               child: const Text(
@@ -89,13 +88,22 @@ class IntroView extends StatelessWidget {
           ),
           Center(
             child: RichText(
-              text: const TextSpan(
+              text: TextSpan(
                 text: "Already have an account?",
-                style: TextStyle(color: Colors.black, fontSize: 15),
+                style: const TextStyle(color: Colors.black, fontSize: 15),
                 children: <TextSpan>[
                   TextSpan(
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () async {
+                        await Get.dialog(
+                          AuthWidget(
+                            isSignUp: false,
+                          ),
+                        );
+                      },
                     text: ' Sign In',
-                    style: TextStyle(color: Color(0xff4ba97d), fontSize: 15),
+                    style:
+                        const TextStyle(color: Color(0xff4ba97d), fontSize: 15),
                   ),
                 ],
               ),

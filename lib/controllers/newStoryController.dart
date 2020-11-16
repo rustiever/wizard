@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:get/get.dart';
+import 'package:wizard/constants.dart';
 import 'package:wizard/models/postModel.dart';
 import 'package:wizard/services/firebaseServices.dart';
 import 'package:intl/intl.dart';
@@ -40,15 +41,17 @@ class NewStoryController extends GetxController {
     print(fileName.value);
 
     if (fileName.value.isNotEmpty) {
+      final number = Random().nextInt(namimage.length);
+      final name = namimage.keys.elementAt(number);
+      final image = namimage.values.elementAt(number);
       post = PostModel(
           finishTime: Random().nextInt(11) + 1,
           date: DateFormat.MMMd().format(DateTime.now()),
           uid: _firebaseService.currentUser.uid,
           data: fileData,
           claps: 0,
-          authorName: _firebaseService.currentUser.name,
-          authorImage:
-              'https://images.unsplash.com/photo-1602747686932-46bc9dbe6098?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=842&q=80',
+          authorName: name,
+          authorImage: image,
           fileName: fileName.value,
           title: title.value);
       _firebaseService.uploadFile(post);

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wizard/controllers/controllers.dart';
@@ -29,14 +31,18 @@ class HomeView extends GetView<HomeController> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Obx(() {
-                if (controller.trendingPosts.isEmpty) {
-                  return CustomProgressIndicator();
-                }
-                return Post1(
-                  postModel: controller.trendingPosts[0],
-                );
-              }),
+              Obx(
+                () {
+                  if (controller.trendingPosts.isEmpty) {
+                    return CustomProgressIndicator();
+                  }
+                  return Post1(
+                    postModel: controller.trendingPosts[Random().nextInt(
+                      controller.trendingPosts.length,
+                    )],
+                  );
+                },
+              ),
               const SizedBox(
                 height: 600,
                 child: VerticalDivider(
@@ -240,16 +246,24 @@ class Try extends StatelessWidget {
         return Column(
           children: [
             Post2(
-              postModel: controller.trendingPosts[0],
+              postModel: controller.trendingPosts[Random().nextInt(
+                controller.trendingPosts.length,
+              )],
             ),
             Post2(
-              postModel: controller.trendingPosts[0],
+              postModel: controller.trendingPosts[Random().nextInt(
+                controller.trendingPosts.length,
+              )],
             ),
             Post2(
-              postModel: controller.trendingPosts[0],
+              postModel: controller.trendingPosts[Random().nextInt(
+                controller.trendingPosts.length,
+              )],
             ),
             Post2(
-              postModel: controller.trendingPosts[0],
+              postModel: controller.trendingPosts[Random().nextInt(
+                controller.trendingPosts.length,
+              )],
             ),
           ],
         );
