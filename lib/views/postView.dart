@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
 import 'package:wizard/controllers/postController.dart';
 import 'package:wizard/models/postModel.dart';
@@ -23,45 +21,12 @@ class PostView extends StatelessWidget {
           ),
           Expanded(
             flex: 6,
-            child: MarkdownPage(postModel: postModel),
+            child: MarkdownPage(data: postModel.data),
           ),
           Expanded(
             child: Column(),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class MarkdownPage extends GetView<PostController> {
-  const MarkdownPage({
-    Key key,
-    @required this.postModel,
-  }) : super(key: key);
-
-  final PostModel postModel;
-
-  @override
-  Widget build(BuildContext context) {
-    return Markdown(
-      data: utf8.decode(postModel.data),
-      selectable: true,
-      onTapLink: (text, href, title) => controller.launchURL(href),
-      styleSheet: MarkdownStyleSheet(
-        h1Align: WrapAlignment.center,
-        h1: const TextStyle(
-            fontFamily: "Times New Roman",
-            fontSize: 48,
-            fontWeight: FontWeight.w400),
-        h2: const TextStyle(
-            fontFamily: "Times New Roman",
-            fontSize: 36,
-            fontWeight: FontWeight.w400),
-        p: const TextStyle(
-            fontFamily: "Times New Roman",
-            fontSize: 21,
-            fontWeight: FontWeight.w400),
       ),
     );
   }

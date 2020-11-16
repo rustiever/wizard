@@ -4,7 +4,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:get/get.dart';
-import 'package:markdown_widget/markdown_widget.dart';
 import 'package:mime_type/mime_type.dart';
 import 'package:wizard/controllers/controllers.dart';
 import 'package:wizard/widgets/widgets.dart';
@@ -136,8 +135,21 @@ class NewStoryView extends StatelessWidget {
                       if (NewStoryController.to.previewMe.value)
                         Expanded(
                           child: SizedBox(
-                            child: MarkdownWidget(
-                              data: utf8.decode(NewStoryController.to.fileData),
+                            child: Row(
+                              children: [
+                                const Expanded(
+                                  child: SizedBox(),
+                                ),
+                                Expanded(
+                                  flex: 5,
+                                  child: MarkdownPage(
+                                    data: NewStoryController.to.fileData,
+                                  ),
+                                ),
+                                const Expanded(
+                                  child: SizedBox(),
+                                ),
+                              ],
                             ),
                           ),
                         )
@@ -197,13 +209,6 @@ class NewStoryView extends StatelessWidget {
                     ),
                   ],
                 ),
-                // child: NewStoryController.to.preview.value
-                //     ? MarkdownWidget(
-                //         data: utf8.decode(NewStoryController.to.fileData),
-                //       )
-                //     : const Center(
-                //         child: Text('Preview will be show here'),
-                //       ),
               ),
             ),
           ),
