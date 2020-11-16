@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:wizard/controllers/controllers.dart';
 import 'package:wizard/widgets/widgets.dart';
 
-class HomeView extends GetView<PostController> {
+class HomeView extends GetView<HomeController> {
   final bottomMenu = [
     "Help",
     "Status",
@@ -226,7 +226,7 @@ class Try extends StatelessWidget {
     @required this.controller,
   }) : super(key: key);
 
-  final PostController controller;
+  final HomeController controller;
 
   @override
   Widget build(BuildContext context) {

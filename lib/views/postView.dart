@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wizard/controllers/postController.dart';
-import 'package:wizard/models/postModel.dart';
+import 'package:wizard/models/models.dart';
+import 'package:wizard/routes.dart';
 import 'package:wizard/widgets/widgets.dart';
 
 class PostView extends StatelessWidget {
-  final PostModel postModel;
-
-  PostView({Key key, @required this.postModel}) : super(key: key);
-
-  final PostController controller = Get.put(PostController());
   @override
   Widget build(BuildContext context) {
+    final postModel = Get.arguments as PostModel;
     return Scaffold(
       appBar: CustomAppBar(),
       body: Row(
         children: [
           Expanded(
-            child: Column(),
+            child: Column(
+              children: [
+                RaisedButton(
+                  onPressed: () => Get.back(result: homeRoute),
+                )
+              ],
+            ),
           ),
           Expanded(
             flex: 6,

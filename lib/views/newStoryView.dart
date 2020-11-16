@@ -93,8 +93,10 @@ class NewStoryView extends StatelessWidget {
                                   final df = utf8
                                       .decode(NewStoryController.to.fileData);
                                   NewStoryController.to.title.value = df
-                                      .substring(df.indexOf('#') + 1,
-                                          df.indexOf("\n") - 1)
+                                      .substring(
+                                        df.indexOf('#') + 1,
+                                        df.indexOf("\n"),
+                                      )
                                       .trim();
                                   NewStoryController.to.preview.value = true;
                                   NewStoryController.to.previewMe.value = false;

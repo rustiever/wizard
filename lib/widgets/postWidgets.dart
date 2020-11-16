@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:markdown_widget/markdown_widget.dart';
 import 'package:wizard/models/models.dart';
+import 'package:wizard/routes.dart';
 import 'package:wizard/views/views.dart';
 
 class Post1 extends StatelessWidget {
@@ -21,8 +22,8 @@ class Post1 extends StatelessWidget {
   void onTap() {
     Get.to(
       PostView(
-        postModel: postModel,
-      ),
+          // postModel: postModel,
+          ),
     );
   }
 
@@ -155,42 +156,17 @@ class Post1 extends StatelessWidget {
 }
 
 class Post2 extends StatelessWidget {
-  final String
-      // postImage,
-      // authorName,
-      // authorImage,
-      // title,
-      // content,
-      // readTime,
-      community,
-      // date,
-      number;
+  final String community, number;
   final PostModel postModel;
-  // final void Function() onTap;
 
   void onTap() {
-    Get.to(
-      PostView(
-        postModel: postModel,
-      ),
-    );
+    Get.toNamed(postRoute, arguments: postModel);
   }
 
   const Post2(
       {Key key,
-      // this.postImage =
-      //     'https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
-      // this.authorName = 'Sharan',
-      // this.authorImage =
-      //     'https://images.unsplash.com/photo-1504593811423-6dd665756598?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
-      // this.title = 'title of this title of this title',
-      // this.content =
-      //     'Before getting started, the documentation assumes you are able to create (or have an existing) Flutter project and also have an active Firebase project. If you do not meet these prerequisites, follow the links below',
-      // this.readTime = '5',
       this.community = 'Wizard Community',
-      // this.onTap,
       this.number,
-      // this.date = "Sep 30",
       @required this.postModel})
       : super(key: key);
   @override

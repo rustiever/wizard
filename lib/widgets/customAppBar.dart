@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:wizard/routes.dart';
 import 'package:wizard/services/firebaseServices.dart';
 import 'package:wizard/views/views.dart';
-
 import '../constants.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
@@ -20,7 +19,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     return AppBar(
       elevation: 0.0,
       backgroundColor: Colors.transparent,
-      automaticallyImplyLeading: false,
+      // automaticallyImplyLeading: false,
       titleSpacing: 70,
       title: GestureDetector(
         onTap: () => Get.offAllNamed(homeRoute),

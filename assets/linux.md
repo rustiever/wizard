@@ -1,4 +1,5 @@
 # What is Linux?
+
 ![image](https://opensource.com/sites/default/files/styles/image-full-size/public/lead-images/OSDC_Resource_Main_Page.png?itok=BS2hUvA5)
 
 Linux is the best-known and most-used open source operating system. As an operating system, Linux is software that sits underneath all of the other software on a computer, receiving requests from those programs and relaying these requests to the computer’s hardware.

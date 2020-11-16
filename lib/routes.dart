@@ -18,9 +18,17 @@ final List<GetPage> routes = [
     name: homeRoute,
     page: () => HomeView(),
     binding: BindingsBuilder.put(
+      () => HomeController(),
+    ),
+  ),
+  GetPage(
+    name: postRoute,
+    page: () => PostView(),
+    binding: BindingsBuilder.put(
       () => PostController(),
     ),
   ),
+
   // GetPage(
   //   name: postRoute,
   //   page: () => PostView(),
