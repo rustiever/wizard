@@ -5,151 +5,137 @@ import 'package:get/get.dart';
 import 'package:markdown_widget/markdown_widget.dart';
 import 'package:wizard/models/models.dart';
 import 'package:wizard/routes.dart';
-import 'package:wizard/views/views.dart';
+import '../constants.dart';
 
 class Post1 extends StatelessWidget {
-  final String postImage,
-      authorName,
-      authorImage,
-      title,
-      content,
-      readTime,
-      community;
+  final String content;
 
   final PostModel postModel;
   // final void Function() onTap;
 
   void onTap() {
-    Get.to(
-      PostView(
-          // postModel: postModel,
-          ),
-    );
+    Get.toNamed(postRoute, arguments: postModel);
   }
 
   const Post1(
-      {Key key,
-      this.postImage =
-          'https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
-      this.authorName = 'Sharan',
-      this.authorImage =
-          'https://images.unsplash.com/photo-1504593811423-6dd665756598?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
-      this.title = 'Title of this title of this title',
-      this.content = 'To read more tap on the article',
-      this.readTime = '5',
-      this.community = 'Flutter Community',
-      this.postModel})
+      {Key key, this.content = 'To read more tap on the Story', this.postModel})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: SizedBox(
-        width: 350,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          // mainAxisAlignment: Mai,
-          children: [
-            GestureDetector(
+      padding: const EdgeInsets.all(15.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: GestureDetector(
               onTap: onTap,
-              child: SizedBox(
-                  height: 260,
-                  width: 360,
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white38,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(25),
+                  ),
+                ),
+                height: 200,
+                width: 250,
+                child: Center(
                   child: MarkdownGenerator(
-                    data: utf8.decode(
-                      postModel.data,
+                    data: utf8.decode(postModel.data),
+                  ).widgets[1],
+                ),
+              ),
+            ),
+          ),
+          const Spacer(),
+          Row(
+            children: [
+              CircleAvatar(
+                backgroundImage: NetworkImage(postModel.authorImage),
+                radius: 12.0,
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: postModel.authorName,
+                      style: const TextStyle(
+                          fontFamily: "Helvetica Neue", color: Colors.black),
                     ),
-                  ).widgets[1]),
+                    const TextSpan(
+                      text: ' in ',
+                      style: TextStyle(
+                          fontFamily: "Helvetica Neue", color: Colors.grey),
+                    ),
+                    TextSpan(
+                      text: community,
+                      style: const TextStyle(
+                          fontFamily: "Helvetica Neue", color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const Spacer(),
+          GestureDetector(
+            onTap: onTap,
+            child: Text(
+              postModel.title,
+              // textAlign: TextAlign.start,
+              style: const TextStyle(
+                  fontFamily: "Helvetica Neue",
+                  fontSize: 22,
+                  fontWeight: FontWeight.w700),
             ),
-            const SizedBox(
-              height: 15,
+          ),
+          const Spacer(),
+          GestureDetector(
+            onTap: onTap,
+            child: Text(
+              content,
+              style: const TextStyle(
+                  fontFamily: "Times New Roman",
+                  fontSize: 18,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w400),
             ),
-            Row(
+          ),
+          // const SizedBox(
+          //   width: 50,
+          // ),
+          const Spacer(
+              // flex: 2,
+              ),
+          GestureDetector(
+            onTap: onTap,
+            child: Row(
               children: [
-                CircleAvatar(
-                  backgroundImage: NetworkImage(postModel.authorImage),
-                  radius: 12.0,
+                Text(
+                  'Read More . ${postModel.finishTime} min read ',
+                  style: const TextStyle(
+                      color: Colors.grey,
+                      fontFamily: "Helvetica Neue",
+                      fontSize: 13),
                 ),
                 const SizedBox(
-                  width: 10,
+                  width: 20,
                 ),
-                RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: postModel.authorName,
-                        style: const TextStyle(
-                            fontFamily: "Helvetica Neue", color: Colors.black),
-                      ),
-                      const TextSpan(
-                        text: ' in ',
-                        style: TextStyle(
-                            fontFamily: "Helvetica Neue", color: Colors.grey),
-                      ),
-                      TextSpan(
-                        text: community,
-                        style: const TextStyle(
-                            fontFamily: "Helvetica Neue", color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ),
+                const Icon(
+                  Icons.star_rate,
+                  size: 13,
+                  color: Colors.grey,
+                )
               ],
             ),
-            const SizedBox(
-              height: 15,
-            ),
-            GestureDetector(
-              onTap: onTap,
-              child: Text(
-                postModel.title,
-                style: const TextStyle(
-                    fontFamily: "Helvetica Neue",
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700),
-              ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            GestureDetector(
-              onTap: onTap,
-              child: Text(
-                content,
-                style: const TextStyle(
-                    fontFamily: "Times New Roman",
-                    fontSize: 18,
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w400),
-              ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            GestureDetector(
-              onTap: onTap,
-              child: Row(
-                children: [
-                  Text(
-                    'Read More . ${postModel.finishTime} min read ',
-                    style: const TextStyle(
-                        color: Colors.grey,
-                        fontFamily: "Helvetica Neue",
-                        fontSize: 13),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  const Icon(
-                    Icons.star_rate,
-                    size: 13,
-                    color: Colors.grey,
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
+          ),
+          const Spacer(
+            flex: 5,
+          ),
+        ],
       ),
     );
   }
