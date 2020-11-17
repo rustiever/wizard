@@ -79,7 +79,7 @@ class FirebaseService {
             userModel.toJson(),
           );
 
-  Future<void> uploadFile(PostModel postModel) async =>
+  Future<void> uploadStory(PostModel postModel) async =>
       firestore.collection(postCollection).add(postModel.toJson());
 
   Future<List<QueryDocumentSnapshot>> getTrendingPosts() async {

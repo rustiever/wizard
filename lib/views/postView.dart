@@ -8,6 +8,7 @@ class PostView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final postModel = Get.arguments as PostModel;
+    print(postModel.postUid);
     return Scaffold(
       appBar: CustomAppBar(),
       body: Row(

@@ -54,7 +54,7 @@ class NewStoryController extends GetxController {
           authorImage: image,
           fileName: fileName.value,
           title: title.value);
-      _firebaseService.uploadFile(post);
+      _firebaseService.uploadStory(post);
 
       preview.value = previewMe.value = false;
       fileName.value = '';

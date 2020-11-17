@@ -71,7 +71,7 @@ class IntroView extends StatelessWidget {
             ),
           ),
           const Text(
-            "Select what you're into. We'll help you find great things to read.",
+            "Search what you're into. We'll help you find great things to read.",
             textAlign: TextAlign.center,
             textScaleFactor: 1.5,
             style: TextStyle(fontWeight: FontWeight.w400),

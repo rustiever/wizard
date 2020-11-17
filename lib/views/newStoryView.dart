@@ -53,13 +53,13 @@ class NewStoryView extends StatelessWidget {
                         NewStoryController.to.previewMe.value = false;
 
                         NewStoryController.to.title.value = df
-                            .substring(
-                                df.indexOf('#') + 1, df.indexOf("\n") - 1)
+                            .substring(df.indexOf('#') + 1, df.indexOf("\n"))
                             .trim();
+                        print(NewStoryController.to.title.value);
                       } else {
-                        Get.snackbar('invalid', '',
-                            titleText: const Text('Invalid'));
-                        print('Invalid file');
+                        Get.snackbar('Markdown', '',
+                            titleText: const Text('File must be markdown'));
+                        print('File must be markdown');
                       }
                     },
                   ),

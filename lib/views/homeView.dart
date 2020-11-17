@@ -5,18 +5,9 @@ import 'package:get/get.dart';
 import 'package:wizard/controllers/controllers.dart';
 import 'package:wizard/widgets/widgets.dart';
 
-class HomeView extends GetView<HomeController> {
-  final bottomMenu = [
-    "Help",
-    "Status",
-    "Writers",
-    "Blog",
-    "Careers",
-    "Privacy",
-    "Terms",
-    "About"
-  ];
+import '../constants.dart';
 
+class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +16,7 @@ class HomeView extends GetView<HomeController> {
       body: ListView(
         children: [
           const SizedBox(
-            height: 30.0,
+            height: 15.0,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

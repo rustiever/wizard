@@ -53,6 +53,17 @@ const profileMenu = [
   "Sign out"
 ];
 
+const bottomMenu = [
+  "Help",
+  "Status",
+  "Writers",
+  "Blog",
+  "Careers",
+  "Privacy",
+  "Terms",
+  "About"
+];
+
 const mimeMD = "text/x-web-markdown";
 String postImage =
         'https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
