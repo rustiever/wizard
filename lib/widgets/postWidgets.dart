@@ -158,133 +158,123 @@ class Post2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 30.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (number != null)
-            CircleAvatar(
-              radius: 20,
-              backgroundColor: Colors.white,
-              foregroundColor: const Color(0xffe6e6e6),
-              child: Text(
-                number,
-                textScaleFactor: 2,
-              ),
-            )
-          else
-            const SizedBox.shrink(),
-          if (number != null)
-            const SizedBox(
-              width: 30,
-            )
-          else
-            const SizedBox.shrink(),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+      padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 8.0),
+      child: SizedBox(
+        // width: 450,
+        height: 150,
+        child: Column(
+          children: [
+            Expanded(
+              child: Row(
                 children: [
-                  CircleAvatar(
-                    backgroundImage: NetworkImage(postModel.authorImage),
-                    radius: 12.0,
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  RichText(
-                    text: TextSpan(
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextSpan(
-                          text: postModel.authorName,
-                          style: const TextStyle(
-                              fontFamily: "Helvetica Neue",
-                              color: Colors.black),
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              backgroundImage:
+                                  NetworkImage(postModel.authorImage),
+                              radius: 15.0,
+                            ),
+                            Expanded(
+                              child: Align(
+                                // alignment: Alignment.centerLeft,
+                                child: RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: postModel.authorName,
+                                        style: const TextStyle(
+                                            fontFamily: "Helvetica Neue",
+                                            color: Colors.black),
+                                      ),
+                                      const TextSpan(
+                                        text: ' in ',
+                                        style: TextStyle(
+                                            fontFamily: "Helvetica Neue",
+                                            color: Colors.grey),
+                                      ),
+                                      TextSpan(
+                                        text: community,
+                                        style: const TextStyle(
+                                            fontFamily: "Helvetica Neue",
+                                            color: Colors.black),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        const TextSpan(
-                          text: ' in ',
-                          style: TextStyle(
-                              fontFamily: "Helvetica Neue", color: Colors.grey),
+                        const Spacer(),
+                        GestureDetector(
+                          onTap: onTap,
+                          child: SizedBox(
+                            width: 230,
+                            child: Text(
+                              postModel.title,
+                              style: const TextStyle(
+                                  fontFamily: "Helvetica Neue",
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
                         ),
-                        TextSpan(
-                          text: community,
-                          style: const TextStyle(
-                              fontFamily: "Helvetica Neue",
-                              color: Colors.black),
+                        const Spacer(),
+                        GestureDetector(
+                          onTap: onTap,
+                          child: Row(
+                            children: [
+                              Text(
+                                '${postModel.date} . ${postModel.finishTime} min read',
+                                style: const TextStyle(
+                                    color: Colors.grey,
+                                    fontFamily: "Helvetica Neue",
+                                    fontSize: 13),
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              if (Random().nextBool())
+                                const Icon(
+                                  Icons.star_rate,
+                                  size: 13,
+                                  color: Colors.grey,
+                                )
+                              else
+                                const SizedBox.shrink(),
+                            ],
+                          ),
                         ),
+                        const Spacer(),
+                        const Spacer(),
                       ],
+                    ),
+                  ),
+                  Expanded(
+                    child: SizedBox(
+                      width: 150,
+                      height: 100,
+                      child: MarkdownGenerator(
+                        data: utf8.decode(
+                          postModel.data,
+                        ),
+                      ).widgets[1],
                     ),
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 8,
-              ),
-              GestureDetector(
-                onTap: onTap,
-                child: SizedBox(
-                  width: 230,
-                  child: Text(
-                    postModel.title,
-                    style: const TextStyle(
-                        fontFamily: "Helvetica Neue",
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              GestureDetector(
-                onTap: onTap,
-                child: Row(
-                  children: [
-                    Text(
-                      '${postModel.date} . ${postModel.finishTime} min read',
-                      style: const TextStyle(
-                          color: Colors.grey,
-                          fontFamily: "Helvetica Neue",
-                          fontSize: 13),
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    if (Random().nextBool())
-                      const Icon(
-                        Icons.star_rate,
-                        size: 13,
-                        color: Colors.grey,
-                      )
-                    else
-                      const SizedBox.shrink(),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            width: 20,
-          ),
-          SizedBox(
-            width: 130,
-            height: 100,
-            child: MarkdownGenerator(
-              data: utf8.decode(
-                postModel.data,
-              ),
-            ).widgets[1],
-          ),
-
-          // SizedBox(
-          //   width: 130,
-          //   height: 100,
-          //   child: Image.network(
-          //     postImage,
-          //     fit: BoxFit.cover,
-          //   ),
-          // ),
-        ],
+            ),
+            const Divider(
+              color: Colors.blueGrey,
+              thickness: 0.4,
+            )
+          ],
+        ),
       ),
     );
   }

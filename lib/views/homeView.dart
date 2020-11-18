@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wizard/controllers/controllers.dart';
@@ -235,17 +234,17 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
                 const SizedBox(
-                  height: 600,
+                  height: 650,
                   child: VerticalDivider(
                     color: Colors.red,
                     // thickness: 5,
                   ),
                 ),
                 Expanded(
-                  child: Try(controller: controller),
+                  child: Post2Widgets(controller: controller),
                 ),
                 const SizedBox(
-                  height: 600,
+                  height: 650,
                   child: VerticalDivider(
                     color: Colors.red,
                     // thickness: 5,
@@ -253,7 +252,7 @@ class HomeView extends GetView<HomeController> {
                 ),
                 Expanded(
                   // flex: 2,
-                  child: Try(controller: controller),
+                  child: Post2Widgets(controller: controller),
                 ),
               ],
             ),
@@ -264,8 +263,8 @@ class HomeView extends GetView<HomeController> {
   }
 }
 
-class Try extends StatelessWidget {
-  const Try({
+class Post2Widgets extends StatelessWidget {
+  const Post2Widgets({
     Key key,
     @required this.controller,
   }) : super(key: key);
