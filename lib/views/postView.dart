@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wizard/models/models.dart';
-import 'package:wizard/routes.dart';
 import 'package:wizard/widgets/widgets.dart';
+
+import '../routes.dart';
 
 class PostView extends StatelessWidget {
   @override
@@ -11,23 +12,33 @@ class PostView extends StatelessWidget {
     print(postModel.postUid);
     return Scaffold(
       appBar: CustomAppBar(),
-      body: Row(
+      body: ListView(
         children: [
-          Expanded(
-            child: Column(
+          // ConstrainedBox(constraints: const BoxConstraints.expand(
+
+          // ),),
+          LimitedBox(
+            maxHeight: 900,
+            child: Row(
               children: [
-                RaisedButton(
-                  onPressed: () => Get.back(result: homeRoute),
-                )
+                Expanded(
+                  child: Column(
+                    children: [
+                      RaisedButton(
+                        onPressed: () => Get.back(result: homeRoute),
+                      )
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 6,
+                  child: MarkdownPage(data: postModel.data),
+                ),
+                Expanded(
+                  child: Column(),
+                ),
               ],
             ),
-          ),
-          Expanded(
-            flex: 6,
-            child: MarkdownPage(data: postModel.data),
-          ),
-          Expanded(
-            child: Column(),
           ),
         ],
       ),

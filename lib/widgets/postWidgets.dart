@@ -32,14 +32,14 @@ class Post1 extends StatelessWidget {
               onTap: onTap,
               child: Container(
                 decoration: const BoxDecoration(
-                  color: Colors.white38,
                   borderRadius: BorderRadius.all(
                     Radius.circular(25),
                   ),
                 ),
-                height: 200,
-                width: 250,
-                child: Center(
+                height: 400,
+                width: 400,
+                child: FittedBox(
+                  fit: BoxFit.fill,
                   child: MarkdownGenerator(
                     data: utf8.decode(postModel.data),
                   ).widgets[1],
@@ -52,7 +52,7 @@ class Post1 extends StatelessWidget {
             children: [
               CircleAvatar(
                 backgroundImage: NetworkImage(postModel.authorImage),
-                radius: 12.0,
+                radius: 17.0,
               ),
               const SizedBox(
                 width: 10,
@@ -160,13 +160,30 @@ class Post2 extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 8.0),
       child: SizedBox(
-        // width: 450,
         height: 150,
         child: Column(
           children: [
             Expanded(
               child: Row(
                 children: [
+                  if (number != null)
+                    CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.white,
+                      foregroundColor: const Color(0xffe6e6e6),
+                      child: Text(
+                        number,
+                        textScaleFactor: 2,
+                      ),
+                    )
+                  else
+                    const SizedBox.shrink(),
+                  if (number != null)
+                    const SizedBox(
+                      width: 25,
+                    )
+                  else
+                    const SizedBox.shrink(),
                   Expanded(
                     flex: 2,
                     child: Column(
@@ -179,9 +196,12 @@ class Post2 extends StatelessWidget {
                                   NetworkImage(postModel.authorImage),
                               radius: 15.0,
                             ),
+                            const SizedBox(
+                              width: 10,
+                            ),
                             Expanded(
                               child: Align(
-                                // alignment: Alignment.centerLeft,
+                                alignment: AlignmentDirectional.topStart,
                                 child: RichText(
                                   text: TextSpan(
                                     children: [
@@ -251,7 +271,6 @@ class Post2 extends StatelessWidget {
                           ),
                         ),
                         const Spacer(),
-                        const Spacer(),
                       ],
                     ),
                   ),
@@ -259,20 +278,26 @@ class Post2 extends StatelessWidget {
                     child: SizedBox(
                       width: 150,
                       height: 100,
-                      child: MarkdownGenerator(
-                        data: utf8.decode(
-                          postModel.data,
-                        ),
-                      ).widgets[1],
+                      child: FittedBox(
+                        fit: BoxFit.fill,
+                        child: MarkdownGenerator(
+                          data: utf8.decode(
+                            postModel.data,
+                          ),
+                        ).widgets[1],
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-            const Divider(
-              color: Colors.blueGrey,
-              thickness: 0.4,
-            )
+            if (number == null)
+              const Divider(
+                color: Colors.blueGrey,
+                thickness: 0.5,
+              )
+            else
+              const SizedBox.shrink()
           ],
         ),
       ),

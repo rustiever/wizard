@@ -210,54 +210,164 @@ class HomeView extends GetView<HomeController> {
       //     // ),
       //   ],
       // ),
-      body: ListView(
-        children: [
-          SizedBox(
-            child: Row(
+      body: Obx(
+        () {
+          if (controller.trendingPosts.isEmpty) {
+            return CustomProgressIndicator();
+          }
+          return RefreshIndicator(
+            onRefresh: () async => controller.trendingPosts.shuffle(),
+            child: ListView(
               children: [
-                Expanded(
-                  // flex: 2,
-                  child: SizedBox(
-                    height: 500,
-                    child: Obx(
-                      () {
-                        if (controller.trendingPosts.isEmpty) {
-                          return CustomProgressIndicator();
-                        }
-                        return Post1(
-                          postModel: controller.trendingPosts[Random().nextInt(
-                            controller.trendingPosts.length,
-                          )],
-                        );
-                      },
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        height: 600,
+                        child: Obx(
+                          () {
+                            if (controller.trendingPosts.isEmpty) {
+                              return CustomProgressIndicator();
+                            }
+                            return Post1(
+                              postModel:
+                                  controller.trendingPosts[Random().nextInt(
+                                controller.trendingPosts.length,
+                              )],
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 650,
+                      child: VerticalDivider(
+                        color: Colors.black,
+                        // thickness: 5,
+                      ),
+                    ),
+                    Expanded(
+                      child: Post2Widgets(controller: controller),
+                    ),
+                    const SizedBox(
+                      height: 650,
+                      child: VerticalDivider(
+                        color: Colors.black,
+                        // thickness: 5,
+                      ),
+                    ),
+                    Expanded(
+                      // flex: 2,
+                      child: Post2Widgets(controller: controller),
+                    ),
+                  ],
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 14.0),
+                  child: Divider(
+                    color: Colors.black,
+                    thickness: 0.5,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 40.0),
+                  child: ListTile(
+                    title: const Text(
+                      "TRENDING ON WIZARD",
+                      style: TextStyle(
+                          fontFamily: "Helvetica Neue",
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    leading: CircleAvatar(
+                      radius: 18,
+                      backgroundColor: Colors.grey[200],
+                      child: const Icon(
+                        Icons.stacked_line_chart_outlined,
+                        color: Color(0xff4ba97d),
+                      ),
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 650,
-                  child: VerticalDivider(
-                    color: Colors.red,
-                    // thickness: 5,
-                  ),
-                ),
-                Expanded(
-                  child: Post2Widgets(controller: controller),
-                ),
-                const SizedBox(
-                  height: 650,
-                  child: VerticalDivider(
-                    color: Colors.red,
-                    // thickness: 5,
-                  ),
-                ),
-                Expanded(
-                  // flex: 2,
-                  child: Post2Widgets(controller: controller),
+                Obx(
+                  () {
+                    if (controller.trendingPosts.isEmpty) {
+                      return CustomProgressIndicator();
+                    }
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Post2(
+                                number: '01',
+                                postModel:
+                                    controller.trendingPosts[Random().nextInt(
+                                  controller.trendingPosts.length,
+                                )],
+                              ),
+                              Post2(
+                                number: '02',
+                                postModel:
+                                    controller.trendingPosts[Random().nextInt(
+                                  controller.trendingPosts.length,
+                                )],
+                              )
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Post2(
+                                  number: '03',
+                                  postModel:
+                                      controller.trendingPosts[Random().nextInt(
+                                    controller.trendingPosts.length,
+                                  )]),
+                              Post2(
+                                number: '04',
+                                postModel:
+                                    controller.trendingPosts[Random().nextInt(
+                                  controller.trendingPosts.length,
+                                )],
+                              )
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Post2(
+                                number: '05',
+                                postModel:
+                                    controller.trendingPosts[Random().nextInt(
+                                  controller.trendingPosts.length,
+                                )],
+                              ),
+                              Post2(
+                                number: '06',
+                                postModel:
+                                    controller.trendingPosts[Random().nextInt(
+                                  controller.trendingPosts.length,
+                                )],
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ],
             ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }
@@ -276,9 +386,7 @@ class Post2Widgets extends StatelessWidget {
     return Obx(
       () {
         if (controller.trendingPosts.isEmpty) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return CustomProgressIndicator();
         }
         return Column(
           children: [

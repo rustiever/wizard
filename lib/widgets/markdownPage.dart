@@ -15,14 +15,18 @@ class MarkdownPage extends GetView<PostController> {
     return Markdown(
       data: utf8.decode(data),
       imageBuilder: (uri, title, alt) => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 17.0),
+        padding: const EdgeInsets.symmetric(vertical: 30.0),
         child: Center(
-          child: Image.network(
-            uri.toString(),
-            fit: BoxFit.fill,
-            errorBuilder: (context, error, stackTrace) => Text(
-              error.toString() + alt,
-            ),
+          child: Column(
+            children: [
+              Image.network(
+                uri.toString(),
+                fit: BoxFit.fill,
+                errorBuilder: (context, error, stackTrace) => Text(
+                  error.toString() + alt,
+                ),
+              ),
+            ],
           ),
         ),
       ),
