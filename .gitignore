@@ -42,6 +42,7 @@ app.*.map.json
 
 # firebase-config object
 web/firebase-config.js
+web/index.html
 
 # firebase public folder
 public/
