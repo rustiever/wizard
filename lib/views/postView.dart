@@ -3,43 +3,223 @@ import 'package:get/get.dart';
 import 'package:wizard/models/models.dart';
 import 'package:wizard/widgets/widgets.dart';
 
-import '../routes.dart';
-
 class PostView extends StatelessWidget {
+  final postModel = Get.arguments as PostModel;
   @override
   Widget build(BuildContext context) {
-    final postModel = Get.arguments as PostModel;
-    print(postModel.postUid);
+    // print(postModel.postUid);
     return Scaffold(
       appBar: CustomAppBar(),
       body: ListView(
         children: [
-          // ConstrainedBox(constraints: const BoxConstraints.expand(
-
-          // ),),
-          LimitedBox(
-            maxHeight: 900,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                    // children: [
+                    //   RaisedButton(
+                    //     onPressed: () => Get.back(result: homeRoute),
+                    //   )
+                    // ],
+                    ),
+              ),
+              Expanded(
+                flex: 6,
+                child: MarkdownPage(data: postModel.data),
+              ),
+              Expanded(
+                child: Column(),
+              ),
+            ],
+          ),
+          Container(
+            height: 300,
+            color: Colors.black,
+            child: Padding(
+              padding: const EdgeInsets.all(40.0),
+              child: Column(
+                children: [
+                  Row(
                     children: [
-                      RaisedButton(
-                        onPressed: () => Get.back(result: homeRoute),
-                      )
+                      Expanded(
+                        child: ListTile(
+                          title: const Text(
+                            'Learn more.',
+                            style: TextStyle(
+                                fontFamily: "Helvetica Neue",
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          isThreeLine: true,
+                          subtitle: RichText(
+                            text: TextSpan(
+                              text:
+                                  'Wizard is an open platform where 170 million readers come to find insightful and dynamic thinking. Here, expert and undiscovered voices alike dive into the heart of any topic and bring new ideas to the surface. ',
+                              style: TextStyle(
+                                fontFamily: "Helvetica Neue",
+                                color: Colors.white.withOpacity(0.7),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: 'Learn more',
+                                  style: TextStyle(
+                                      fontFamily: "Helvetica Neue",
+                                      color: Colors.white.withOpacity(0.7),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      decoration: TextDecoration.underline),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: ListTile(
+                          title: const Text(
+                            'Make Wizard yours.',
+                            style: TextStyle(
+                                fontFamily: "Helvetica Neue",
+                                fontSize: 20,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          isThreeLine: true,
+                          subtitle: RichText(
+                            text: TextSpan(
+                              text:
+                                  'Follow the writers, publications, and topics that matter to you, and you’ll see them on your homepage and in your inbox. ',
+                              style: TextStyle(
+                                fontFamily: "Helvetica Neue",
+                                color: Colors.white.withOpacity(0.7),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: 'Explore',
+                                  style: TextStyle(
+                                      fontFamily: "Helvetica Neue",
+                                      color: Colors.white.withOpacity(0.7),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      decoration: TextDecoration.underline),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: ListTile(
+                          title: const Text(
+                            'Share your thinking.',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: "Helvetica Neue",
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          isThreeLine: true,
+                          subtitle: RichText(
+                            text: TextSpan(
+                              text:
+                                  'If you have a story to tell, knowledge to share, or a perspective to offer — welcome home. It’s easy and free to post your thinking on any topic. ',
+                              style: TextStyle(
+                                fontFamily: "Helvetica Neue",
+                                fontSize: 14,
+                                color: Colors.white.withOpacity(0.7),
+                                fontWeight: FontWeight.w400,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: 'Write on Wizard',
+                                  style: TextStyle(
+                                      color: Colors.white.withOpacity(0.7),
+                                      fontFamily: "Helvetica Neue",
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      decoration: TextDecoration.underline),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
-                ),
-                Expanded(
-                  flex: 6,
-                  child: MarkdownPage(data: postModel.data),
-                ),
-                Expanded(
-                  child: Column(),
-                ),
-              ],
+                  const Padding(
+                    padding: EdgeInsets.only(top: 20),
+                    child: Divider(
+                      color: Colors.white,
+                      thickness: 1,
+                      indent: 20,
+                      endIndent: 20,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 25, vertical: 25),
+                    child: Row(
+                      children: [
+                        const Text(
+                          'Wizard',
+                          textScaleFactor: 2,
+                          style: TextStyle(
+                              color: Colors.white,
+                              letterSpacing: -1,
+                              fontFamily: "Helvetica Neue"),
+                        ),
+                        const Spacer(),
+                        SizedBox(
+                          child: Row(
+                            children: [
+                              FlatButton(
+                                onPressed: () {},
+                                child: const Text(
+                                  'About',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16,
+                                      fontFamily: "Helvetica Neue"),
+                                ),
+                              ),
+                              FlatButton(
+                                onPressed: () {},
+                                child: const Text(
+                                  'Help',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16,
+                                      fontFamily: "Helvetica Neue"),
+                                ),
+                              ),
+                              FlatButton(
+                                onPressed: () {},
+                                child: const Text(
+                                  'Legal',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16,
+                                      fontFamily: "Helvetica Neue"),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
+          )
         ],
       ),
     );

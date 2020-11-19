@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wizard/controllers/controllers.dart';
@@ -212,11 +211,11 @@ class HomeView extends GetView<HomeController> {
       // ),
       body: Obx(
         () {
-          if (controller.trendingPosts.isEmpty) {
+          if (controller.posts.isEmpty) {
             return CustomProgressIndicator();
           }
           return RefreshIndicator(
-            onRefresh: () async => controller.trendingPosts.shuffle(),
+            onRefresh: () async => controller.shuffle(),
             child: ListView(
               children: [
                 Row(
@@ -227,14 +226,11 @@ class HomeView extends GetView<HomeController> {
                         height: 600,
                         child: Obx(
                           () {
-                            if (controller.trendingPosts.isEmpty) {
+                            if (controller.posts.isEmpty) {
                               return CustomProgressIndicator();
                             }
                             return Post1(
-                              postModel:
-                                  controller.trendingPosts[Random().nextInt(
-                                controller.trendingPosts.length,
-                              )],
+                              postModel: controller.posts[0],
                             );
                           },
                         ),
@@ -254,12 +250,10 @@ class HomeView extends GetView<HomeController> {
                       height: 650,
                       child: VerticalDivider(
                         color: Colors.black,
-                        // thickness: 5,
                       ),
                     ),
                     Expanded(
-                      // flex: 2,
-                      child: Post2Widgets(controller: controller),
+                      child: Post2WidgetsB(controller: controller),
                     ),
                   ],
                 ),
@@ -292,7 +286,7 @@ class HomeView extends GetView<HomeController> {
                 ),
                 Obx(
                   () {
-                    if (controller.trendingPosts.isEmpty) {
+                    if (controller.posts.isEmpty) {
                       return CustomProgressIndicator();
                     }
                     return Row(
@@ -304,17 +298,11 @@ class HomeView extends GetView<HomeController> {
                             children: [
                               Post2(
                                 number: '01',
-                                postModel:
-                                    controller.trendingPosts[Random().nextInt(
-                                  controller.trendingPosts.length,
-                                )],
+                                postModel: controller.posts[9],
                               ),
                               Post2(
                                 number: '02',
-                                postModel:
-                                    controller.trendingPosts[Random().nextInt(
-                                  controller.trendingPosts.length,
-                                )],
+                                postModel: controller.posts[10],
                               )
                             ],
                           ),
@@ -325,16 +313,10 @@ class HomeView extends GetView<HomeController> {
                             children: [
                               Post2(
                                   number: '03',
-                                  postModel:
-                                      controller.trendingPosts[Random().nextInt(
-                                    controller.trendingPosts.length,
-                                  )]),
+                                  postModel: controller.posts[11]),
                               Post2(
                                 number: '04',
-                                postModel:
-                                    controller.trendingPosts[Random().nextInt(
-                                  controller.trendingPosts.length,
-                                )],
+                                postModel: controller.posts[12],
                               )
                             ],
                           ),
@@ -345,17 +327,11 @@ class HomeView extends GetView<HomeController> {
                             children: [
                               Post2(
                                 number: '05',
-                                postModel:
-                                    controller.trendingPosts[Random().nextInt(
-                                  controller.trendingPosts.length,
-                                )],
+                                postModel: controller.posts[13],
                               ),
                               Post2(
                                 number: '06',
-                                postModel:
-                                    controller.trendingPosts[Random().nextInt(
-                                  controller.trendingPosts.length,
-                                )],
+                                postModel: controller.posts[14],
                               )
                             ],
                           ),
@@ -369,50 +345,6 @@ class HomeView extends GetView<HomeController> {
           );
         },
       ),
-    );
-  }
-}
-
-class Post2Widgets extends StatelessWidget {
-  const Post2Widgets({
-    Key key,
-    @required this.controller,
-  }) : super(key: key);
-
-  final HomeController controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return Obx(
-      () {
-        if (controller.trendingPosts.isEmpty) {
-          return CustomProgressIndicator();
-        }
-        return Column(
-          children: [
-            Post2(
-              postModel: controller.trendingPosts[Random().nextInt(
-                controller.trendingPosts.length,
-              )],
-            ),
-            Post2(
-              postModel: controller.trendingPosts[Random().nextInt(
-                controller.trendingPosts.length,
-              )],
-            ),
-            Post2(
-              postModel: controller.trendingPosts[Random().nextInt(
-                controller.trendingPosts.length,
-              )],
-            ),
-            Post2(
-              postModel: controller.trendingPosts[Random().nextInt(
-                controller.trendingPosts.length,
-              )],
-            ),
-          ],
-        );
-      },
     );
   }
 }

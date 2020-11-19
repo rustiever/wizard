@@ -1,7 +1,6 @@
 import 'dart:math';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 
 Color grey = const Color(0xff757575);
 
@@ -15,6 +14,8 @@ const String recentPostCollection = 'recents';
 
 final MaterialColor randomColors =
     Colors.primaries[Random().nextInt(Colors.primaries.length)];
+
+final int randomIndicator = Random().nextInt(Indicator.values.length);
 
 const namimage = {
   "Imran Lester":

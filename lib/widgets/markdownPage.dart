@@ -32,6 +32,8 @@ class MarkdownPage extends GetView<PostController> {
       ),
       selectable: true,
       onTapLink: (text, href, title) => controller.launchURL(href),
+      padding: const EdgeInsets.all(20),
+      shrinkWrap: true,
       styleSheet: MarkdownStyleSheet(
         h1Align: WrapAlignment.center,
         code: const TextStyle(

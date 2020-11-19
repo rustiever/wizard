@@ -3,9 +3,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:markdown_widget/markdown_widget.dart';
+import 'package:wizard/controllers/controllers.dart';
 import 'package:wizard/models/models.dart';
 import 'package:wizard/routes.dart';
 import '../constants.dart';
+import 'widgets.dart';
 
 class Post1 extends StatelessWidget {
   final String content;
@@ -464,6 +466,78 @@ class Post3 extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class Post2Widgets extends StatelessWidget {
+  const Post2Widgets({
+    Key key,
+    @required this.controller,
+  }) : super(key: key);
+
+  final HomeController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () {
+        if (controller.posts.isEmpty) {
+          return CustomProgressIndicator();
+        }
+        return Column(
+          children: [
+            Post2(
+              postModel: controller.posts[1],
+            ),
+            Post2(
+              postModel: controller.posts[2],
+            ),
+            Post2(
+              postModel: controller.posts[3],
+            ),
+            Post2(
+              postModel: controller.posts[4],
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class Post2WidgetsB extends StatelessWidget {
+  const Post2WidgetsB({
+    Key key,
+    @required this.controller,
+  }) : super(key: key);
+
+  final HomeController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () {
+        if (controller.posts.isEmpty) {
+          return CustomProgressIndicator();
+        }
+        return Column(
+          children: [
+            Post2(
+              postModel: controller.posts[5],
+            ),
+            Post2(
+              postModel: controller.posts[6],
+            ),
+            Post2(
+              postModel: controller.posts[7],
+            ),
+            Post2(
+              postModel: controller.posts[8],
+            ),
+          ],
+        );
+      },
     );
   }
 }

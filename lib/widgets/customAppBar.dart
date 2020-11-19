@@ -18,8 +18,12 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0.0,
-      backgroundColor: Colors.transparent,
-      // automaticallyImplyLeading: false,
+      backgroundColor: const Color(0xff00fa9a),
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back_ios),
+        onPressed: () => Get.back(),
+        color: const Color(0xff757575),
+      ),
       titleSpacing: 70,
       title: GestureDetector(
         onTap: () => Get.offAllNamed(homeRoute),
@@ -28,7 +32,6 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
           textScaleFactor: 2,
           style: TextStyle(
               color: Colors.black,
-              // fontSize: 3,
               letterSpacing: -1,
               fontFamily: "Helvetica Neue"),
         ),
@@ -92,7 +95,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
               10.0,
             ),
             child: const CircleAvatar(
-              backgroundColor: Colors.white,
+              backgroundColor: Color(0xff00fa9a),
               child: Icon(
                 Icons.person_outline_rounded,
                 color: Color(0xff757575),
