@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:wizard/widgets/widgets.dart';
 
@@ -86,26 +87,29 @@ class IntroView extends StatelessWidget {
               child: GetStartedButton(),
             ),
           ),
-          Center(
-            child: RichText(
-              text: TextSpan(
-                text: "Already have an account?",
-                style: const TextStyle(color: Colors.black, fontSize: 15),
-                children: <TextSpan>[
-                  TextSpan(
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () async {
-                        await Get.dialog(
-                          AuthWidget(
-                            isSignUp: false,
-                          ),
-                        );
-                      },
-                    text: ' Sign In',
-                    style:
-                        const TextStyle(color: Color(0xff4ba97d), fontSize: 15),
-                  ),
-                ],
+          MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: Center(
+              child: RichText(
+                text: TextSpan(
+                  text: "Already have an account?",
+                  style: const TextStyle(color: Colors.black, fontSize: 15),
+                  children: <TextSpan>[
+                    TextSpan(
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () async {
+                          await Get.dialog(
+                            AuthWidget(
+                              isSignUp: false,
+                            ),
+                          );
+                        },
+                      text: ' Sign In',
+                      style: const TextStyle(
+                          color: Color(0xff4ba97d), fontSize: 15),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

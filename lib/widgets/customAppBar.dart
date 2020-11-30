@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:search_page/search_page.dart';
+import 'package:wizard/controllers/controllers.dart';
+import 'package:wizard/models/models.dart';
 import 'package:wizard/routes.dart';
 import 'package:wizard/services/firebaseServices.dart';
 import 'package:wizard/views/views.dart';
 import '../constants.dart';
+import 'widgets.dart';
 
-class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
+class CustomAppBar extends GetView<HomeController> with PreferredSizeWidget {
   @override
   final Size preferredSize;
 
@@ -38,13 +42,32 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-            icon: const Icon(
-              Icons.search_sharp,
-              color: Color(0xff757575),
-              size: 25.0,
-            ),
-            padding: const EdgeInsets.all(15.0),
-            onPressed: () {}),
+          icon: const Icon(
+            Icons.search_sharp,
+            color: Color(0xff757575),
+            size: 25.0,
+          ),
+          padding: const EdgeInsets.all(15.0),
+          onPressed: () => showSearch(
+            context: context,
+            delegate: SearchPage<PostModel>(
+                searchLabel: 'Search Posts',
+                suggestion: const Center(
+                  child: Text('Filter Posts by name, date or claps'),
+                ),
+                builder: (t) => Post3(
+                      postModel: t,
+                    ),
+                filter: (t) => [
+                      t.authorName,
+                      t.date,
+                      t.title,
+                      t.finishTime.toString(),
+                      t.claps.toString()
+                    ],
+                items: controller.totalPosts),
+          ),
+        ),
         IconButton(
             icon: const Icon(
               Icons.bookmark_outline_rounded,

@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:markdown_widget/markdown_widget.dart';
-import 'package:wizard/controllers/controllers.dart';
-import 'package:wizard/models/models.dart';
-import 'package:wizard/routes.dart';
+
 import '../constants.dart';
+import '../controllers/controllers.dart';
+import '../models/models.dart';
+import '../routes.dart';
 import 'widgets.dart';
 
 class Post1 extends StatelessWidget {
@@ -87,7 +89,6 @@ class Post1 extends StatelessWidget {
             onTap: onTap,
             child: Text(
               postModel.title,
-              // textAlign: TextAlign.start,
               style: const TextStyle(
                   fontFamily: "Helvetica Neue",
                   fontSize: 22,
@@ -106,12 +107,7 @@ class Post1 extends StatelessWidget {
                   fontWeight: FontWeight.w400),
             ),
           ),
-          // const SizedBox(
-          //   width: 50,
-          // ),
-          const Spacer(
-              // flex: 2,
-              ),
+          const Spacer(),
           GestureDetector(
             onTap: onTap,
             child: Row(
@@ -308,32 +304,13 @@ class Post2 extends StatelessWidget {
 }
 
 class Post3 extends StatelessWidget {
-  final String postImage,
-      authorName,
-      authorImage,
-      title,
-      content,
-      readTime,
-      community,
-      number,
-      date;
-  final void Function() onTap;
-  const Post3(
-      {Key key,
-      this.postImage =
-          'https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
-      this.authorName = 'Sharan',
-      this.authorImage =
-          'https://images.unsplash.com/photo-1504593811423-6dd665756598?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
-      this.title = 'title of this title of this title',
-      this.content =
-          'Before  (or have an existing) Flutter project and  If you do not meet these prerequisites, follow the links below',
-      this.readTime = '5',
-      this.community = 'Flutter Community',
-      this.onTap,
-      this.number,
-      this.date = "Sep 30"})
-      : super(key: key);
+  final PostModel postModel;
+
+  void onTap() {
+    Get.toNamed(postRoute, arguments: postModel);
+  }
+
+  const Post3({Key key, this.postModel}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -345,7 +322,7 @@ class Post3 extends StatelessWidget {
             Row(
               children: [
                 CircleAvatar(
-                  backgroundImage: NetworkImage(authorImage),
+                  backgroundImage: NetworkImage(postModel.authorImage),
                   radius: 12.0,
                 ),
                 const SizedBox(
@@ -355,7 +332,7 @@ class Post3 extends StatelessWidget {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: authorName,
+                        text: postModel.authorName,
                         style: const TextStyle(
                             fontFamily: "Helvetica Neue", color: Colors.black),
                       ),
@@ -382,7 +359,7 @@ class Post3 extends StatelessWidget {
               child: SizedBox(
                 width: 500,
                 child: Text(
-                  title + title,
+                  postModel.title,
                   style: const TextStyle(
                       fontFamily: "Helvetica Neue",
                       fontSize: 16,
@@ -415,7 +392,7 @@ class Post3 extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    '$date . $readTime min read',
+                    '${postModel.date} . ${postModel.finishTime} min read',
                     style: const TextStyle(
                         color: Colors.grey,
                         fontFamily: "Helvetica Neue",
@@ -460,9 +437,13 @@ class Post3 extends StatelessWidget {
         SizedBox(
           width: 200,
           height: 160,
-          child: Image.network(
-            postImage,
-            fit: BoxFit.cover,
+          child: FittedBox(
+            fit: BoxFit.fill,
+            child: MarkdownGenerator(
+              data: utf8.decode(
+                postModel.data,
+              ),
+            ).widgets[1],
           ),
         ),
       ],
