@@ -5,8 +5,16 @@ import 'views/views.dart';
 
 const postRoute = '/postView';
 const homeRoute = '/homeView';
+const bookRoute = 'bookmarkView';
 
 final List<GetPage> routes = [
+  GetPage(
+    name: bookRoute,
+    page: () => BookmarkView(),
+    binding: BindingsBuilder.put(
+      () => BookMarkController(),
+    ),
+  ),
   GetPage(
     name: '/${profileMenu[0]}',
     page: () => NewStoryView(),

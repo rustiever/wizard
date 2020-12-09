@@ -69,13 +69,16 @@ class CustomAppBar extends GetView<HomeController> with PreferredSizeWidget {
           ),
         ),
         IconButton(
-            icon: const Icon(
-              Icons.bookmark_outline_rounded,
-              color: Color(0xff757575),
-              size: 25.0,
-            ),
-            padding: const EdgeInsets.all(15.0),
-            onPressed: () {}),
+          icon: const Icon(
+            Icons.bookmark_outline_rounded,
+            color: Color(0xff757575),
+            size: 25.0,
+          ),
+          padding: const EdgeInsets.all(15.0),
+          onPressed: () {
+            Get.toNamed(bookRoute);
+          },
+        ),
         IconButton(
             icon: const Icon(
               Icons.notifications_on_outlined,

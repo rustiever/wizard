@@ -1,12 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:wizard/models/models.dart';
 import 'package:wizard/services/firebaseServices.dart';
 
 class HomeController extends GetxController {
+  static HomeController get to => Get.find();
   FirebaseService _firebaseService;
   RxList<PostModel> posts = <PostModel>[].obs;
   RxList<PostModel> totalPosts = <PostModel>[].obs;
+
+  final RxSet<BuildContext> saved = <BuildContext>{}.obs;
 
 // @override
   // void onClose() {
@@ -15,15 +19,16 @@ class HomeController extends GetxController {
   // }
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     _firebaseService = FirebaseService.instance;
-    _getPosts();
+    await _getPosts();
+
     super.onInit();
   }
 
   Future<void> shuffle() async {
     posts.clear();
-    await Future.delayed(const Duration(milliseconds: 100));
+    // await Future.delayed(const Duration(milliseconds: 100));
     posts.assignAll(
       totalPosts.sublist(0, 15),
     );

@@ -18,14 +18,18 @@ class FirebaseService {
   Future<void> createUserWithEmailAndPassword(
       String email, String pass, String name) async {
     try {
-      final UserCredential userCredential = await auth
-          .createUserWithEmailAndPassword(email: email, password: pass);
+      final UserCredential userCredential =
+          await auth.createUserWithEmailAndPassword(
+              // email: email, password: pass
+              email: 'sdf@gm.in',
+              password: 'Sharan@57');
 
       await addUserToDB(
         UserModel(
           name: userCredential.user.displayName ?? name,
           uid: userCredential.user.uid,
           email: userCredential.user.email,
+          bookmarks: <String>[],
         ),
       );
       currentUser = UserModel.fromJson(
@@ -79,13 +83,31 @@ class FirebaseService {
             userModel.toJson(),
           );
 
+  Future<void> bookmarking(UserModel userModel, String postUid,
+      {bool flag = true}) async {
+    if (flag) {
+      await firestore.collection(userCollection).doc(userModel.uid).update({
+        "bookmarks": FieldValue.arrayUnion([postUid])
+      });
+    } else {
+      await firestore.collection(userCollection).doc(userModel.uid).update({
+        "bookmarks": FieldValue.arrayRemove([postUid])
+      });
+    }
+  }
+
+  Future<UserModel> getBookmarks(String uid) async {
+    return UserModel.fromJson(
+      (await firestore.collection(userCollection).doc(uid).get()).data(),
+    );
+  }
+
   Future<void> uploadStory(PostModel postModel) async =>
       firestore.collection(postCollection).add(postModel.toJson());
 
   Future<List<QueryDocumentSnapshot>> getTrendingPosts() async {
     final List<QueryDocumentSnapshot> snapshots =
         (await firestore.collection(postCollection).get()).docs;
-    // print('trend here ${snapshots.first.data()['data']}');
     return snapshots;
   }
 }

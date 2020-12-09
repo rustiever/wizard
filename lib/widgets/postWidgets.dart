@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:markdown_widget/markdown_widget.dart';
+import 'package:wizard/services/firebaseServices.dart';
 
 import '../constants.dart';
 import '../controllers/controllers.dart';
@@ -126,7 +128,10 @@ class Post1 extends StatelessWidget {
                   Icons.star_rate,
                   size: 13,
                   color: Colors.grey,
-                )
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
               ],
             ),
           ),
@@ -303,17 +308,23 @@ class Post2 extends StatelessWidget {
   }
 }
 
-class Post3 extends StatelessWidget {
+class Post3 extends StatefulWidget {
   final PostModel postModel;
 
   const Post3({Key key, this.postModel}) : super(key: key);
 
+  @override
+  _Post3State createState() => _Post3State();
+}
+
+class _Post3State extends State<Post3> {
   void onTap() {
-    Get.toNamed(postRoute, arguments: postModel);
+    Get.toNamed(postRoute, arguments: widget.postModel);
   }
 
   @override
   Widget build(BuildContext context) {
+    final alreadySaved = HomeController.to.saved.contains(context);
     return Padding(
       padding: const EdgeInsets.fromLTRB(25.0, 12.0, 0.0, 12.0),
       child: Row(
@@ -325,7 +336,7 @@ class Post3 extends StatelessWidget {
               Row(
                 children: [
                   CircleAvatar(
-                    backgroundImage: NetworkImage(postModel.authorImage),
+                    backgroundImage: NetworkImage(widget.postModel.authorImage),
                     radius: 12.0,
                   ),
                   const SizedBox(
@@ -335,7 +346,7 @@ class Post3 extends StatelessWidget {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: postModel.authorName,
+                          text: widget.postModel.authorName,
                           style: const TextStyle(
                               fontFamily: "Helvetica Neue",
                               color: Colors.black),
@@ -364,7 +375,7 @@ class Post3 extends StatelessWidget {
                 child: SizedBox(
                   width: 350,
                   child: Text(
-                    postModel.title,
+                    widget.postModel.title,
                     style: const TextStyle(
                         fontFamily: "Helvetica Neue",
                         fontSize: 16,
@@ -380,7 +391,7 @@ class Post3 extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      '${postModel.date} . ${postModel.finishTime} min read',
+                      '${widget.postModel.date} . ${widget.postModel.finishTime} min read',
                       style: const TextStyle(
                           color: Colors.grey,
                           fontFamily: "Helvetica Neue",
@@ -401,8 +412,47 @@ class Post3 extends StatelessWidget {
                       width: 20,
                     ),
                     IconButton(
-                      icon: const Icon(Icons.bookmark_border),
-                      onPressed: () {},
+                      icon: alreadySaved
+                          ? const Icon(
+                              Icons.bookmark,
+                              color: Color(0xff4ba97d),
+                            )
+                          : const Icon(Icons.bookmark_border),
+                      onPressed: () async {
+                        if (alreadySaved) {
+                          HomeController.to.saved.remove(context);
+                          await FirebaseFirestore.instance
+                              .collection(userCollection)
+                              .doc(FirebaseService.instance.currentUser.uid)
+                              .update({
+                            "bookmarks":
+                                FieldValue.arrayRemove([widget.postModel.uid])
+                          });
+                        } else {
+                          await FirebaseFirestore.instance
+                              .collection(userCollection)
+                              .doc(FirebaseService.instance.currentUser.uid)
+                              .update({
+                            "bookmarks":
+                                FieldValue.arrayUnion([widget.postModel.uid])
+                          });
+                          HomeController.to.saved.assign(context);
+                        }
+                        setState(
+                          () {},
+                        );
+                        // await FirebaseFirestore.instance
+                        //     .collection(userCollection)
+                        //     .doc(FirebaseService.instance.currentUser.uid)
+                        //     .update({
+                        //   "bookmarks": FieldValue.arrayUnion(['sds'])
+                        // });
+
+                        // FirebaseService.instance.bookmarking(
+                        //     FirebaseService.instance.currentUser,
+                        //     widget.postModel.uid,
+                        //     flag: alreadySaved);
+                      },
                     ),
                     const SizedBox(
                       width: 10,
@@ -426,7 +476,7 @@ class Post3 extends StatelessWidget {
               fit: BoxFit.fill,
               child: MarkdownGenerator(
                 data: utf8.decode(
-                  postModel.data,
+                  widget.postModel.data,
                 ),
               ).widgets[1],
             ),
