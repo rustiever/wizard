@@ -96,14 +96,29 @@ class FirebaseService {
     }
   }
 
-  Future<UserModel> getBookmarks(String uid) async {
+  Future<List<String>> updateUserBookMarkLists() async {
     return UserModel.fromJson(
-      (await firestore.collection(userCollection).doc(uid).get()).data(),
-    );
+      (await firestore.collection(userCollection).doc(currentUser.uid).get())
+          .data(),
+    ).bookmarks;
+  }
+
+  Future<List<DocumentSnapshot>> getBookmarks() async {
+    final List<DocumentSnapshot> list = [];
+    for (final uid in await updateUserBookMarkLists()) {
+      list.add(
+        await firestore.collection(postCollection).doc(uid).get(),
+      );
+    }
+    print(list.length);
+    print('hereree');
+    return list;
   }
 
   Future<void> uploadStory(PostModel postModel) async =>
-      firestore.collection(postCollection).add(postModel.toJson());
+      firestore.collection(postCollection).add(
+            postModel.toJson(),
+          );
 
   Future<List<QueryDocumentSnapshot>> getTrendingPosts() async {
     final List<QueryDocumentSnapshot> snapshots =

@@ -308,23 +308,15 @@ class Post2 extends StatelessWidget {
   }
 }
 
-class Post3 extends StatefulWidget {
-  final PostModel postModel;
-
-  const Post3({Key key, this.postModel}) : super(key: key);
-
-  @override
-  _Post3State createState() => _Post3State();
-}
-
-class _Post3State extends State<Post3> {
+class Post4 extends GetView<BookMarkController> {
+  final int index;
   void onTap() {
-    Get.toNamed(postRoute, arguments: widget.postModel);
+    Get.toNamed(postRoute, arguments: controller.bookPosts[index]);
   }
 
+  const Post4({Key key, this.index}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final alreadySaved = HomeController.to.saved.contains(context);
     return Padding(
       padding: const EdgeInsets.fromLTRB(25.0, 12.0, 0.0, 12.0),
       child: Row(
@@ -336,7 +328,8 @@ class _Post3State extends State<Post3> {
               Row(
                 children: [
                   CircleAvatar(
-                    backgroundImage: NetworkImage(widget.postModel.authorImage),
+                    backgroundImage: NetworkImage(
+                        controller.bookPosts[index].value.authorImage),
                     radius: 12.0,
                   ),
                   const SizedBox(
@@ -346,7 +339,7 @@ class _Post3State extends State<Post3> {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: widget.postModel.authorName,
+                          text: controller.bookPosts[index].value.authorName,
                           style: const TextStyle(
                               fontFamily: "Helvetica Neue",
                               color: Colors.black),
@@ -375,7 +368,7 @@ class _Post3State extends State<Post3> {
                 child: SizedBox(
                   width: 350,
                   child: Text(
-                    widget.postModel.title,
+                    controller.bookPosts[index].value.title,
                     style: const TextStyle(
                         fontFamily: "Helvetica Neue",
                         fontSize: 16,
@@ -391,7 +384,182 @@ class _Post3State extends State<Post3> {
                 child: Row(
                   children: [
                     Text(
-                      '${widget.postModel.date} . ${widget.postModel.finishTime} min read',
+                      '${controller.bookPosts[index].value.date} . ${controller.bookPosts[index].value.finishTime} min read',
+                      style: const TextStyle(
+                          color: Colors.grey,
+                          fontFamily: "Helvetica Neue",
+                          fontSize: 13),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    if (Random().nextBool())
+                      const Icon(
+                        Icons.star_rate,
+                        size: 13,
+                        color: Colors.grey,
+                      )
+                    else
+                      const SizedBox.shrink(),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Obx(
+                      () => IconButton(
+                        icon: controller.bookPosts[index].value.bookmarked
+                            ? const Icon(
+                                Icons.bookmark,
+                                color: Color(0xff4ba97d),
+                              )
+                            : const Icon(Icons.bookmark_border),
+                        onPressed: () async {
+                          if (controller.bookPosts[index].value.bookmarked) {
+                            // controller.bookPosts[index].update(
+                            //   (val) {
+                            //     val.bookmarked = !val.bookmarked;
+                            //   },
+                            // );
+                            controller.bookPosts[index].value.bookmarked =
+                                !controller.bookPosts[index].value.bookmarked;
+                            controller.bookPosts[index].refresh();
+                            await FirebaseFirestore.instance
+                                .collection(userCollection)
+                                .doc(FirebaseService.instance.currentUser.uid)
+                                .update(
+                              {
+                                "bookmarks": FieldValue.arrayRemove(
+                                    [controller.bookPosts[index].value.postUid])
+                              },
+                            );
+                            print('yes');
+                          } else {
+                            print('no');
+                            controller.bookPosts[index].value.bookmarked =
+                                !controller.bookPosts[index].value.bookmarked;
+                            controller.bookPosts[index].refresh();
+                            await FirebaseFirestore.instance
+                                .collection(userCollection)
+                                .doc(FirebaseService.instance.currentUser.uid)
+                                .update(
+                              {
+                                "bookmarks": FieldValue.arrayUnion(
+                                    [controller.bookPosts[index].value.postUid])
+                              },
+                            );
+                          }
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.more_horiz_rounded),
+                      onPressed: () {},
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          SizedBox(
+            width: 200,
+            height: 160,
+            child: FittedBox(
+              fit: BoxFit.fill,
+              child: MarkdownGenerator(
+                data: utf8.decode(
+                  controller.bookPosts[index].value.data,
+                ),
+              ).widgets[1],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Post3 extends GetView<HomeController> {
+  final PostModel postModel;
+
+  const Post3({Key key, this.postModel}) : super(key: key);
+  void onTap() {
+    Get.toNamed(postRoute, arguments: postModel);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(25.0, 12.0, 0.0, 12.0),
+      child: Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                children: [
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(postModel.authorImage),
+                    radius: 12.0,
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: postModel.authorName,
+                          style: const TextStyle(
+                              fontFamily: "Helvetica Neue",
+                              color: Colors.black),
+                        ),
+                        const TextSpan(
+                          text: ' in ',
+                          style: TextStyle(
+                              fontFamily: "Helvetica Neue", color: Colors.grey),
+                        ),
+                        TextSpan(
+                          text: community,
+                          style: const TextStyle(
+                              fontFamily: "Helvetica Neue",
+                              color: Colors.black),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              GestureDetector(
+                onTap: onTap,
+                child: SizedBox(
+                  width: 350,
+                  child: Text(
+                    postModel.title,
+                    style: const TextStyle(
+                        fontFamily: "Helvetica Neue",
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              GestureDetector(
+                onTap: onTap,
+                child: Row(
+                  children: [
+                    Text(
+                      '${postModel.date} . ${postModel.finishTime} min read',
                       style: const TextStyle(
                           color: Colors.grey,
                           fontFamily: "Helvetica Neue",
@@ -412,46 +580,36 @@ class _Post3State extends State<Post3> {
                       width: 20,
                     ),
                     IconButton(
-                      icon: alreadySaved
+                      icon: postModel.bookmarked
                           ? const Icon(
                               Icons.bookmark,
                               color: Color(0xff4ba97d),
                             )
                           : const Icon(Icons.bookmark_border),
                       onPressed: () async {
-                        if (alreadySaved) {
-                          HomeController.to.saved.remove(context);
+                        if (postModel.bookmarked) {
                           await FirebaseFirestore.instance
                               .collection(userCollection)
                               .doc(FirebaseService.instance.currentUser.uid)
-                              .update({
-                            "bookmarks":
-                                FieldValue.arrayRemove([widget.postModel.uid])
-                          });
+                              .update(
+                            {
+                              "bookmarks":
+                                  FieldValue.arrayRemove([postModel.postUid])
+                            },
+                          );
+                          print('yes');
                         } else {
+                          print('no');
                           await FirebaseFirestore.instance
                               .collection(userCollection)
                               .doc(FirebaseService.instance.currentUser.uid)
-                              .update({
-                            "bookmarks":
-                                FieldValue.arrayUnion([widget.postModel.uid])
-                          });
-                          HomeController.to.saved.assign(context);
+                              .update(
+                            {
+                              "bookmarks":
+                                  FieldValue.arrayUnion([postModel.postUid])
+                            },
+                          );
                         }
-                        setState(
-                          () {},
-                        );
-                        // await FirebaseFirestore.instance
-                        //     .collection(userCollection)
-                        //     .doc(FirebaseService.instance.currentUser.uid)
-                        //     .update({
-                        //   "bookmarks": FieldValue.arrayUnion(['sds'])
-                        // });
-
-                        // FirebaseService.instance.bookmarking(
-                        //     FirebaseService.instance.currentUser,
-                        //     widget.postModel.uid,
-                        //     flag: alreadySaved);
                       },
                     ),
                     const SizedBox(
@@ -476,7 +634,7 @@ class _Post3State extends State<Post3> {
               fit: BoxFit.fill,
               child: MarkdownGenerator(
                 data: utf8.decode(
-                  widget.postModel.data,
+                  postModel.data,
                 ),
               ).widgets[1],
             ),

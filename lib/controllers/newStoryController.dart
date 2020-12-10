@@ -45,15 +45,16 @@ class NewStoryController extends GetxController {
       final name = namimage.keys.elementAt(number);
       final image = namimage.values.elementAt(number);
       post = PostModel(
-          finishTime: Random().nextInt(11) + 1,
-          date: DateFormat.MMMd().format(DateTime.now()),
-          uid: _firebaseService.currentUser.uid,
-          data: fileData,
-          claps: 0,
-          authorName: name,
-          authorImage: image,
-          fileName: fileName.value,
-          title: title.value);
+        finishTime: Random().nextInt(11) + 1,
+        date: DateFormat.MMMd().format(DateTime.now()),
+        ownerUid: _firebaseService.currentUser.uid,
+        data: fileData,
+        claps: 0,
+        authorName: name,
+        authorImage: image,
+        fileName: fileName.value,
+        title: title.value,
+      );
       _firebaseService.uploadStory(post);
 
       preview.value = previewMe.value = false;

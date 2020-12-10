@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:wizard/models/models.dart';
 import 'package:wizard/services/firebaseServices.dart';
@@ -9,8 +8,6 @@ class HomeController extends GetxController {
   FirebaseService _firebaseService;
   RxList<PostModel> posts = <PostModel>[].obs;
   RxList<PostModel> totalPosts = <PostModel>[].obs;
-
-  final RxSet<BuildContext> saved = <BuildContext>{}.obs;
 
 // @override
   // void onClose() {
@@ -39,7 +36,12 @@ class HomeController extends GetxController {
         await _firebaseService.getTrendingPosts();
     for (final item in snapshots) {
       totalPosts.add(
-        PostModel.fromJson(item.data()).copyWith(postUid: item.id),
+        PostModel.fromJson(
+          item.data(),
+        ).copyWith(
+          postUid: item.id,
+          bookmarked: _firebaseService.currentUser.bookmarks.contains(item.id),
+        ),
       );
     }
     print(totalPosts.length);

@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 class PostModel {
   PostModel({
     @required this.title,
-    @required this.uid,
+    @required this.ownerUid,
     @required this.data,
     @required this.claps,
     @required this.finishTime,
@@ -12,10 +12,11 @@ class PostModel {
     @required this.date,
     @required this.fileName,
     this.postUid,
+    this.bookmarked,
   });
 
   String title;
-  String uid;
+  String ownerUid;
   List<int> data;
   double claps;
   int finishTime;
@@ -24,10 +25,11 @@ class PostModel {
   String date;
   String postUid;
   String fileName;
+  bool bookmarked;
 
   PostModel copyWith({
     String title,
-    String uid,
+    String ownerUid,
     List<int> data,
     double claps,
     int finishTime,
@@ -36,10 +38,11 @@ class PostModel {
     String date,
     String postUid,
     String fileName,
+    bool bookmarked,
   }) =>
       PostModel(
         title: title ?? this.title,
-        uid: uid ?? this.uid,
+        ownerUid: ownerUid ?? this.ownerUid,
         data: data ?? this.data,
         claps: claps ?? this.claps,
         finishTime: finishTime ?? this.finishTime,
@@ -48,11 +51,12 @@ class PostModel {
         date: date ?? this.date,
         fileName: fileName ?? this.fileName,
         postUid: postUid ?? this.postUid,
+        bookmarked: bookmarked ?? this.bookmarked,
       );
 
   factory PostModel.fromJson(Map<String, dynamic> json) => PostModel(
         title: json["title"] == null ? null : json["title"] as String,
-        uid: json["uid"] == null ? null : json["uid"] as String,
+        ownerUid: json["uid"] == null ? null : json["uid"] as String,
         data: json["data"] == null
             ? null
             : List<int>.from(json["data"].map((x) => x) as Iterable),
@@ -67,11 +71,13 @@ class PostModel {
         date: json["date"] == null ? null : json["date"] as String,
         postUid: json["postUid"] == null ? null : json["postUid"] as String,
         fileName: json["fileName"] == null ? null : json["fileName"] as String,
+        bookmarked:
+            json["bookmarked"] == null ? null : json["bookmared"] as bool,
       );
 
   Map<String, dynamic> toJson() => {
         "title": title,
-        "uid": uid,
+        "uid": ownerUid,
         "data": data == null
             ? null
             : List<dynamic>.from(
@@ -83,6 +89,7 @@ class PostModel {
         "authorImage": authorImage,
         "date": date,
         "postUid": postUid,
-        "fileName": fileName
+        "fileName": fileName,
+        "bookmarked": bookmarked
       };
 }

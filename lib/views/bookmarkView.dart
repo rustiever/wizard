@@ -11,16 +11,23 @@ class BookmarkView extends GetView<BookMarkController> {
       appBar: CustomAppBar(),
       body: RefreshIndicator(
         onRefresh: () => controller.refreshBooks(),
-        child: Column(
-          children: [
-            Container(
-              child: Center(
-                child: Obx(
-                  () => Text(controller.user.value.bookmarks.length.toString()),
-                ),
-              ),
-            ),
-          ],
+        child: Center(
+          child: Obx(
+            () {
+              if (controller.bookPosts.isNullOrBlank) {
+                return CustomProgressIndicator();
+              }
+              print(controller.bookPosts.length);
+              return ListView.builder(
+                itemCount: controller.bookPosts.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Post4(
+                    index: index,
+                  );
+                },
+              );
+            },
+          ),
         ),
       ),
     );
