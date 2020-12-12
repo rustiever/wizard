@@ -14,12 +14,12 @@ class BookmarkView extends GetView<BookMarkController> {
         child: Center(
           child: Obx(
             () {
-              if (controller.bookPosts.isNullOrBlank) {
+              if (controller.posts.isNullOrBlank) {
                 return CustomProgressIndicator();
               }
-              print(controller.bookPosts.length);
+              print(controller.posts.length);
               return ListView.builder(
-                itemCount: controller.bookPosts.length,
+                itemCount: controller.posts.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Post4(
                     index: index,

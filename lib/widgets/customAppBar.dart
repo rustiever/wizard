@@ -50,20 +50,20 @@ class CustomAppBar extends GetView<HomeController> with PreferredSizeWidget {
           padding: const EdgeInsets.all(15.0),
           onPressed: () => showSearch(
             context: context,
-            delegate: SearchPage<PostModel>(
+            delegate: SearchPage<Rx<PostModel>>(
                 searchLabel: 'Search Posts',
                 suggestion: const Center(
                   child: Text('Filter Posts by name, date or claps'),
                 ),
                 builder: (t) => Post3(
-                      postModel: t,
+                      postModel: t.value,
                     ),
                 filter: (t) => [
-                      t.authorName,
-                      t.date,
-                      t.title,
-                      t.finishTime.toString(),
-                      t.claps.toString()
+                      t.value.authorName,
+                      t.value.date,
+                      t.value.title,
+                      t.value.finishTime.toString(),
+                      t.value.claps.toString()
                     ],
                 items: controller.totalPosts),
           ),

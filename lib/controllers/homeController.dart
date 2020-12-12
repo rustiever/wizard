@@ -6,8 +6,9 @@ import 'package:wizard/services/firebaseServices.dart';
 class HomeController extends GetxController {
   static HomeController get to => Get.find();
   FirebaseService _firebaseService;
-  RxList<PostModel> posts = <PostModel>[].obs;
-  RxList<PostModel> totalPosts = <PostModel>[].obs;
+  RxList<Rx<PostModel>> posts = <Rx<PostModel>>[].obs;
+  RxList<Rx<PostModel>> totalPosts = <Rx<PostModel>>[].obs;
+  // RxList<PostModel> posts = <PostModel>[].obs;
 
 // @override
   // void onClose() {
@@ -38,10 +39,13 @@ class HomeController extends GetxController {
       totalPosts.add(
         PostModel.fromJson(
           item.data(),
-        ).copyWith(
-          postUid: item.id,
-          bookmarked: _firebaseService.currentUser.bookmarks.contains(item.id),
-        ),
+        )
+            .copyWith(
+              postUid: item.id,
+              bookmarked:
+                  _firebaseService.currentUser.bookmarks.contains(item.id),
+            )
+            .obs,
       );
     }
     print(totalPosts.length);

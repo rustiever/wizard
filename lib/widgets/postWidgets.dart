@@ -13,11 +13,10 @@ import '../models/models.dart';
 import '../routes.dart';
 import 'widgets.dart';
 
-class Post1 extends StatelessWidget {
+class Post1 extends GetView<HomeController> {
   final String content;
 
   final PostModel postModel;
-  // final void Function() onTap;
 
   void onTap() {
     Get.toNamed(postRoute, arguments: postModel);
@@ -47,7 +46,7 @@ class Post1 extends StatelessWidget {
                 child: FittedBox(
                   fit: BoxFit.fill,
                   child: MarkdownGenerator(
-                    data: utf8.decode(postModel.data),
+                    data: utf8.decode(controller.posts[0].value.data),
                   ).widgets[1],
                 ),
               ),
@@ -57,7 +56,8 @@ class Post1 extends StatelessWidget {
           Row(
             children: [
               CircleAvatar(
-                backgroundImage: NetworkImage(postModel.authorImage),
+                backgroundImage:
+                    NetworkImage(controller.posts[0].value.authorImage),
                 radius: 17.0,
               ),
               const SizedBox(
@@ -67,7 +67,7 @@ class Post1 extends StatelessWidget {
                 text: TextSpan(
                   children: [
                     TextSpan(
-                      text: postModel.authorName,
+                      text: controller.posts[0].value.authorName,
                       style: const TextStyle(
                           fontFamily: "Helvetica Neue", color: Colors.black),
                     ),
@@ -115,7 +115,7 @@ class Post1 extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  'Read More . ${postModel.finishTime} min read ',
+                  'Read More . ${controller.posts[0].value.finishTime} min read ',
                   style: const TextStyle(
                       color: Colors.grey,
                       fontFamily: "Helvetica Neue",
@@ -132,6 +132,7 @@ class Post1 extends StatelessWidget {
                 const SizedBox(
                   width: 20,
                 ),
+                HomeBookMarkWidget(controller: controller, index: 0)
               ],
             ),
           ),
@@ -144,9 +145,10 @@ class Post1 extends StatelessWidget {
   }
 }
 
-class Post2 extends StatelessWidget {
+class Post2 extends GetView<HomeController> {
   final String community, number;
   final PostModel postModel;
+  final int index;
 
   void onTap() {
     Get.toNamed(postRoute, arguments: postModel);
@@ -154,6 +156,7 @@ class Post2 extends StatelessWidget {
 
   const Post2(
       {Key key,
+      @required this.index,
       this.community = 'Wizard Community',
       this.number,
       @required this.postModel})
@@ -270,6 +273,8 @@ class Post2 extends StatelessWidget {
                                 )
                               else
                                 const SizedBox.shrink(),
+                              HomeBookMarkWidget(
+                                  controller: controller, index: index)
                             ],
                           ),
                         ),
@@ -311,7 +316,7 @@ class Post2 extends StatelessWidget {
 class Post4 extends GetView<BookMarkController> {
   final int index;
   void onTap() {
-    Get.toNamed(postRoute, arguments: controller.bookPosts[index]);
+    Get.toNamed(postRoute, arguments: controller.posts[index]);
   }
 
   const Post4({Key key, this.index}) : super(key: key);
@@ -328,8 +333,8 @@ class Post4 extends GetView<BookMarkController> {
               Row(
                 children: [
                   CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        controller.bookPosts[index].value.authorImage),
+                    backgroundImage:
+                        NetworkImage(controller.posts[index].value.authorImage),
                     radius: 12.0,
                   ),
                   const SizedBox(
@@ -339,7 +344,7 @@ class Post4 extends GetView<BookMarkController> {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: controller.bookPosts[index].value.authorName,
+                          text: controller.posts[index].value.authorName,
                           style: const TextStyle(
                               fontFamily: "Helvetica Neue",
                               color: Colors.black),
@@ -368,7 +373,7 @@ class Post4 extends GetView<BookMarkController> {
                 child: SizedBox(
                   width: 350,
                   child: Text(
-                    controller.bookPosts[index].value.title,
+                    controller.posts[index].value.title,
                     style: const TextStyle(
                         fontFamily: "Helvetica Neue",
                         fontSize: 16,
@@ -384,7 +389,7 @@ class Post4 extends GetView<BookMarkController> {
                 child: Row(
                   children: [
                     Text(
-                      '${controller.bookPosts[index].value.date} . ${controller.bookPosts[index].value.finishTime} min read',
+                      '${controller.posts[index].value.date} . ${controller.posts[index].value.finishTime} min read',
                       style: const TextStyle(
                           color: Colors.grey,
                           fontFamily: "Helvetica Neue",
@@ -404,51 +409,9 @@ class Post4 extends GetView<BookMarkController> {
                     const SizedBox(
                       width: 20,
                     ),
-                    Obx(
-                      () => IconButton(
-                        icon: controller.bookPosts[index].value.bookmarked
-                            ? const Icon(
-                                Icons.bookmark,
-                                color: Color(0xff4ba97d),
-                              )
-                            : const Icon(Icons.bookmark_border),
-                        onPressed: () async {
-                          if (controller.bookPosts[index].value.bookmarked) {
-                            // controller.bookPosts[index].update(
-                            //   (val) {
-                            //     val.bookmarked = !val.bookmarked;
-                            //   },
-                            // );
-                            controller.bookPosts[index].value.bookmarked =
-                                !controller.bookPosts[index].value.bookmarked;
-                            controller.bookPosts[index].refresh();
-                            await FirebaseFirestore.instance
-                                .collection(userCollection)
-                                .doc(FirebaseService.instance.currentUser.uid)
-                                .update(
-                              {
-                                "bookmarks": FieldValue.arrayRemove(
-                                    [controller.bookPosts[index].value.postUid])
-                              },
-                            );
-                            print('yes');
-                          } else {
-                            print('no');
-                            controller.bookPosts[index].value.bookmarked =
-                                !controller.bookPosts[index].value.bookmarked;
-                            controller.bookPosts[index].refresh();
-                            await FirebaseFirestore.instance
-                                .collection(userCollection)
-                                .doc(FirebaseService.instance.currentUser.uid)
-                                .update(
-                              {
-                                "bookmarks": FieldValue.arrayUnion(
-                                    [controller.bookPosts[index].value.postUid])
-                              },
-                            );
-                          }
-                        },
-                      ),
+                    BookMarkWidget(
+                      controller: controller,
+                      index: index,
                     ),
                     const SizedBox(
                       width: 10,
@@ -472,12 +435,124 @@ class Post4 extends GetView<BookMarkController> {
               fit: BoxFit.fill,
               child: MarkdownGenerator(
                 data: utf8.decode(
-                  controller.bookPosts[index].value.data,
+                  controller.posts[index].value.data,
                 ),
               ).widgets[1],
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class BookMarkWidget extends StatelessWidget {
+  const BookMarkWidget({
+    Key key,
+    @required this.controller,
+    @required this.index,
+  }) : super(key: key);
+
+  final BookMarkController controller;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () => IconButton(
+        icon: controller.posts[index].value.bookmarked
+            ? const Icon(
+                Icons.bookmark,
+                color: Color(0xff4ba97d),
+              )
+            : const Icon(Icons.bookmark_border),
+        onPressed: () async {
+          if (controller.posts[index].value.bookmarked) {
+            controller.posts[index].value.bookmarked =
+                !controller.posts[index].value.bookmarked;
+            controller.posts[index].refresh();
+            await FirebaseFirestore.instance
+                .collection(userCollection)
+                .doc(FirebaseService.instance.currentUser.uid)
+                .update(
+              {
+                "bookmarks": FieldValue.arrayRemove(
+                    [controller.posts[index].value.postUid])
+              },
+            );
+            print('yes');
+          } else {
+            print('no');
+            controller.posts[index].value.bookmarked =
+                !controller.posts[index].value.bookmarked;
+            controller.posts[index].refresh();
+            await FirebaseFirestore.instance
+                .collection(userCollection)
+                .doc(FirebaseService.instance.currentUser.uid)
+                .update(
+              {
+                "bookmarks": FieldValue.arrayUnion(
+                    [controller.posts[index].value.postUid])
+              },
+            );
+          }
+        },
+      ),
+    );
+  }
+}
+
+class HomeBookMarkWidget extends StatelessWidget {
+  const HomeBookMarkWidget({
+    Key key,
+    @required this.controller,
+    @required this.index,
+  }) : super(key: key);
+
+  final HomeController controller;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () => IconButton(
+        icon: controller.posts[index].value.bookmarked
+            ? const Icon(
+                Icons.bookmark,
+                color: Color(0xff4ba97d),
+              )
+            : const Icon(Icons.bookmark_border),
+        onPressed: () async {
+          if (controller.posts[index].value.bookmarked) {
+            controller.posts[index].value.bookmarked =
+                !controller.posts[index].value.bookmarked;
+            controller.posts[index].refresh();
+            await FirebaseFirestore.instance
+                .collection(userCollection)
+                .doc(FirebaseService.instance.currentUser.uid)
+                .update(
+              {
+                "bookmarks": FieldValue.arrayRemove(
+                    [controller.posts[index].value.postUid])
+              },
+            );
+            print('yes');
+          } else {
+            print('no');
+            controller.posts[index].value.bookmarked =
+                !controller.posts[index].value.bookmarked;
+            controller.posts[index].refresh();
+            await FirebaseFirestore.instance
+                .collection(userCollection)
+                .doc(FirebaseService.instance.currentUser.uid)
+                .update(
+              {
+                "bookmarks": FieldValue.arrayUnion(
+                    [controller.posts[index].value.postUid])
+              },
+            );
+          }
+        },
       ),
     );
   }
@@ -663,16 +738,20 @@ class Post2Widgets extends StatelessWidget {
         return Column(
           children: [
             Post2(
-              postModel: controller.posts[1],
+              postModel: controller.posts[1].value,
+              index: 1,
             ),
             Post2(
-              postModel: controller.posts[2],
+              postModel: controller.posts[2].value,
+              index: 2,
             ),
             Post2(
-              postModel: controller.posts[3],
+              postModel: controller.posts[3].value,
+              index: 3,
             ),
             Post2(
-              postModel: controller.posts[4],
+              postModel: controller.posts[4].value,
+              index: 4,
             ),
           ],
         );
@@ -699,16 +778,20 @@ class Post2WidgetsB extends StatelessWidget {
         return Column(
           children: [
             Post2(
-              postModel: controller.posts[5],
+              postModel: controller.posts[5].value,
+              index: 5,
             ),
             Post2(
-              postModel: controller.posts[6],
+              postModel: controller.posts[6].value,
+              index: 6,
             ),
             Post2(
-              postModel: controller.posts[7],
+              postModel: controller.posts[7].value,
+              index: 7,
             ),
             Post2(
-              postModel: controller.posts[8],
+              postModel: controller.posts[8].value,
+              index: 8,
             ),
           ],
         );

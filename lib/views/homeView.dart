@@ -23,14 +23,14 @@ class HomeView extends GetView<HomeController> {
                   children: [
                     Expanded(
                       child: SizedBox(
-                        height: 600,
+                        height: 620,
                         child: Obx(
                           () {
                             if (controller.posts.isEmpty) {
                               return CustomProgressIndicator();
                             }
                             return Post1(
-                              postModel: controller.posts[0],
+                              postModel: controller.posts[0].value,
                             );
                           },
                         ),
@@ -98,11 +98,13 @@ class HomeView extends GetView<HomeController> {
                             children: [
                               Post2(
                                 number: '01',
-                                postModel: controller.posts[9],
+                                postModel: controller.posts[9].value,
+                                index: 9,
                               ),
                               Post2(
                                 number: '02',
-                                postModel: controller.posts[10],
+                                postModel: controller.posts[10].value,
+                                index: 10,
                               )
                             ],
                           ),
@@ -112,11 +114,14 @@ class HomeView extends GetView<HomeController> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Post2(
-                                  number: '03',
-                                  postModel: controller.posts[11]),
+                                number: '03',
+                                postModel: controller.posts[11].value,
+                                index: 11,
+                              ),
                               Post2(
                                 number: '04',
-                                postModel: controller.posts[12],
+                                postModel: controller.posts[12].value,
+                                index: 12,
                               )
                             ],
                           ),
@@ -127,11 +132,13 @@ class HomeView extends GetView<HomeController> {
                             children: [
                               Post2(
                                 number: '05',
-                                postModel: controller.posts[13],
+                                postModel: controller.posts[13].value,
+                                index: 13,
                               ),
                               Post2(
                                 number: '06',
-                                postModel: controller.posts[14],
+                                postModel: controller.posts[14].value,
+                                index: 14,
                               )
                             ],
                           ),

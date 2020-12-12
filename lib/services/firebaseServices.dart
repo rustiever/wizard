@@ -97,6 +97,10 @@ class FirebaseService {
   }
 
   Future<List<String>> updateUserBookMarkLists() async {
+    currentUser = UserModel.fromJson(
+      (await firestore.collection(userCollection).doc(currentUser.uid).get())
+          .data(),
+    );
     return UserModel.fromJson(
       (await firestore.collection(userCollection).doc(currentUser.uid).get())
           .data(),
@@ -111,7 +115,6 @@ class FirebaseService {
       );
     }
     print(list.length);
-    print('hereree');
     return list;
   }
 

@@ -6,7 +6,7 @@ import 'package:wizard/services/firebaseServices.dart';
 class BookMarkController extends GetxController {
   static BookMarkController get to => Get.find();
   FirebaseService _firebaseService;
-  RxList<Rx<PostModel>> bookPosts = <Rx<PostModel>>[].obs;
+  RxList<Rx<PostModel>> posts = <Rx<PostModel>>[].obs;
 
   @override
   void onInit() {
@@ -17,10 +17,10 @@ class BookMarkController extends GetxController {
 
   Future<void> refreshBooks() async {
     final List<DocumentSnapshot> documentSnapshots =
-        await FirebaseService.instance.getBookmarks();
-    final List<Rx<PostModel>> posts = [];
+        await _firebaseService.getBookmarks();
+    final List<Rx<PostModel>> bookPosts = [];
     for (final item in documentSnapshots) {
-      posts.add(
+      bookPosts.add(
         PostModel.fromJson(
           item.data(),
         )
@@ -33,6 +33,6 @@ class BookMarkController extends GetxController {
       );
     }
 
-    bookPosts.assignAll(posts);
+    posts.assignAll(bookPosts);
   }
 }
