@@ -4,6 +4,8 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:wizard/widgets/widgets.dart';
 
+import '../constants.dart';
+
 class IntroView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -340,7 +342,10 @@ class IntroView extends StatelessWidget {
                         children: [
                           IntroPageFlatButton(
                             title: 'About Wizard',
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.toNamed(
+                                  '/${profileMenu[profileMenu.length - 2]}');
+                            },
                           ),
                           IntroPageFlatButton(
                             title: 'Write',

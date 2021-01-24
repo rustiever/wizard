@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
 Color grey = const Color(0xff757575);
+Color green = const Color(0xff3e8920);
+Color olivedrab = const Color(0xff4d9833);
 
 const ampImg = 'assets/Amp.png';
 
 const String userCollection = 'users';
 const String postCollection = 'posts';
-const String trendPostCollection = 'trends';
-const String recomondsCollection = 'recomonds';
-const String recentPostCollection = 'recents';
 
 final MaterialColor randomColors =
     Colors.primaries[Random().nextInt(Colors.primaries.length)];
@@ -51,6 +50,7 @@ const profileMenu = [
   "Customize your interests",
   "Wizard Partner Program",
   "Help",
+  "About",
   "Sign out"
 ];
 

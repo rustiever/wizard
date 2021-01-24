@@ -23,6 +23,13 @@ final List<GetPage> routes = [
     ),
   ),
   GetPage(
+    name: '/${profileMenu[profileMenu.length - 2]}',
+    page: () => AboutView(),
+    binding: BindingsBuilder.put(
+      () => NewStoryController(),
+    ),
+  ),
+  GetPage(
     name: homeRoute,
     page: () => HomeView(),
     bindings: [

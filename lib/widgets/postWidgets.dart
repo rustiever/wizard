@@ -736,24 +736,13 @@ class Post2Widgets extends StatelessWidget {
           return CustomProgressIndicator();
         }
         return Column(
-          children: [
-            Post2(
-              postModel: controller.posts[1].value,
-              index: 1,
+          children: List.generate(
+            4,
+            (index) => Post2(
+              index: index,
+              postModel: controller.posts[index].value,
             ),
-            Post2(
-              postModel: controller.posts[2].value,
-              index: 2,
-            ),
-            Post2(
-              postModel: controller.posts[3].value,
-              index: 3,
-            ),
-            Post2(
-              postModel: controller.posts[4].value,
-              index: 4,
-            ),
-          ],
+          ),
         );
       },
     );

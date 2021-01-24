@@ -51,6 +51,9 @@ class CustomAppBar extends GetView<HomeController> with PreferredSizeWidget {
           onPressed: () => showSearch(
             context: context,
             delegate: SearchPage<Rx<PostModel>>(
+                barTheme: ThemeData(
+                  backgroundColor: const Color(0xff00fa9a),
+                ),
                 searchLabel: 'Search Posts',
                 suggestion: const Center(
                   child: Text('Filter Posts by name, date or claps'),
@@ -80,13 +83,14 @@ class CustomAppBar extends GetView<HomeController> with PreferredSizeWidget {
           },
         ),
         IconButton(
-            icon: const Icon(
-              Icons.notifications_on_outlined,
-              color: Color(0xff757575),
-              size: 25.0,
-            ),
-            padding: const EdgeInsets.all(15.0),
-            onPressed: () {}),
+          icon: const Icon(
+            Icons.notifications_on_outlined,
+            color: Color(0xff757575),
+            size: 25.0,
+          ),
+          padding: const EdgeInsets.all(15.0),
+          onPressed: () {},
+        ),
         Padding(
           padding: const EdgeInsets.only(right: 90),
           child: PopupMenuButton(
@@ -109,7 +113,10 @@ class CustomAppBar extends GetView<HomeController> with PreferredSizeWidget {
             onSelected: (String value) async {
               if (value == profileMenu[0]) {
                 Get.toNamed('/${profileMenu[0]}');
-              } else if (value == profileMenu[10]) {
+              } else if (value == profileMenu[profileMenu.length - 2]) {
+                // Get.offAll(IntroView());
+                Get.toNamed('/${profileMenu[profileMenu.length - 2]}');
+              } else if (value == profileMenu[profileMenu.length - 1]) {
                 Get.offAll(IntroView());
                 await FirebaseService.instance.signOut();
               }
