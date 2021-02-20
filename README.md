@@ -24,13 +24,33 @@
 
   - [Check the live Web App](https://wizard-17895.web.app)
 
-## Screens 😍
-<p align="center">
-<img src="screenshots/landing.png" height="400"/>
-<img src="screenshots/homepage.png" height="400"/>
-<img src="screenshots/blogView.png" height="400"/>
-<img src="screenshots/bvw2.png" height="400"/>
-<img src="screenshots/bvw3.png" height="400"/>
-<img src="screenshots/bvw4.png" height="400"/>
-<img src="screenshots/newstory.png" height="400"/>
-</p>
+## ✨ Features
+- [x] SignIn/SignUp/SignOut.
+- [x] Posting New Story.
+- [x] Viewing the stories.
+- [x] Bookmarking the stories.
+- [x] Search and Filtering.
+- [ ] Dark Mode.
+
+## 📸 ScreenShots
+|||
+|:-------------:|:-------------:|
+|<img src="screenshots/landing.png" width="400">|<img src="screenshots/homepage.png" width="400">|
+|<img src="screenshots/blogView.png" width="400">|<img src="screenshots/bvw2.png" width="400">|
+|<img src="screenshots/bvw3.png" width="400">|<img src="screenshots/bvw4.png" width="400">|
+|<img src="screenshots/newstory.png" width="400">|<img src="screenshots/about.png" width="400">|
+
+## 🔌 Plugins
+| Name | Usage |
+|------|-------|
+|[**Getx**](https://pub.dev/packages/get)| State Management|
+|[**Markdown_widget**](https://pub.dev/packages/markdown_widget)| To render the markdown content|
+|[**Flutter_dropzone**](https://pub.dev/packages/flutter_dropzone)| To handle drag-and-drop|
+|[**Mime Type**](https://pub.dev/packages/mime_type)| Get mime type of a file|
+|[**File_picker**](https://pub.dev/packages/file_picker)| To Pick the file from local storage|
+|[**Url_launcher**](https://pub.dev/packages/url_launcher)| To launch the url|
+|[**Lint**](https://pub.dev/packages/lint)| To lint the project|
+
+
+## 🔖 LICENCE
+[MIT License](https://github.com/rustiever/wizard/blob/main/LICENSE.md)
