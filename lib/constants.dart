@@ -2,11 +2,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
-Color grey = const Color(0xff757575);
-Color green = const Color(0xff3e8920);
-Color olivedrab = const Color(0xff4d9833);
-
-const ampImg = 'assets/Amp.png';
+const Color grey = Color(0xff757575);
+const Color green = Color(0xff3e8920);
+const Color olivedrab = Color(0xff4d9833);
 
 const String userCollection = 'users';
 const String postCollection = 'posts';
@@ -66,7 +64,7 @@ const bottomMenu = [
 ];
 
 const mimeMD = "text/x-web-markdown";
-String postImage =
+const String postImage =
         'https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
     authorName = 'Sharan',
     authorImage =

@@ -76,15 +76,15 @@ class AuthWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(25.0),
                         ),
                       ),
-                      // validator: (val) {
-                      //   if (val.isEmpty) {
-                      //     return "Email cannot be empty";
-                      //   } else if (!GetUtils.isEmail(val)) {
-                      //     return 'Not valid email';
-                      //   } else {
-                      //     return null;
-                      //   }
-                      // },
+                      validator: (val) {
+                        if (val.isEmpty) {
+                          return "Email cannot be empty";
+                        } else if (!GetUtils.isEmail(val)) {
+                          return 'Not valid email';
+                        } else {
+                          return null;
+                        }
+                      },
                       style: const TextStyle(
                         fontFamily: "Poppins",
                       ),
@@ -103,15 +103,15 @@ class AuthWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(25.0),
                         ),
                       ),
-                      // validator: (val) {
-                      //   if (val.isEmpty) {
-                      //     return "password cannot be empty";
-                      //   } else if (!GetUtils.isLengthBetween(val, 8, 12)) {
-                      //     return 'Not a valid password';
-                      //   } else {
-                      //     return null;
-                      //   }
-                      // },
+                      validator: (val) {
+                        if (val.isEmpty) {
+                          return "password cannot be empty";
+                        } else if (!GetUtils.isLengthBetween(val, 8, 12)) {
+                          return 'Not a valid password';
+                        } else {
+                          return null;
+                        }
+                      },
                       style: const TextStyle(
                         fontFamily: "Poppins",
                       ),
