@@ -76,9 +76,9 @@ class Post1 extends GetView<HomeController> {
                       style: TextStyle(
                           fontFamily: "Helvetica Neue", color: Colors.grey),
                     ),
-                    TextSpan(
+                    const TextSpan(
                       text: community,
-                      style: const TextStyle(
+                      style: TextStyle(
                           fontFamily: "Helvetica Neue", color: Colors.black),
                     ),
                   ],
@@ -354,9 +354,9 @@ class Post4 extends GetView<BookMarkController> {
                           style: TextStyle(
                               fontFamily: "Helvetica Neue", color: Colors.grey),
                         ),
-                        TextSpan(
+                        const TextSpan(
                           text: community,
-                          style: const TextStyle(
+                          style: TextStyle(
                               fontFamily: "Helvetica Neue",
                               color: Colors.black),
                         ),
@@ -599,9 +599,9 @@ class Post3 extends GetView<HomeController> {
                           style: TextStyle(
                               fontFamily: "Helvetica Neue", color: Colors.grey),
                         ),
-                        TextSpan(
+                        const TextSpan(
                           text: community,
-                          style: const TextStyle(
+                          style: TextStyle(
                               fontFamily: "Helvetica Neue",
                               color: Colors.black),
                         ),

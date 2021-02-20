@@ -19,10 +19,9 @@ class FirebaseService {
       String email, String pass, String name) async {
     try {
       final UserCredential userCredential =
-          await auth.createUserWithEmailAndPassword(
-              // email: email, password: pass
-              email: 'sdf@gm.in',
-              password: 'Sharan@57');
+          await auth.createUserWithEmailAndPassword(email: email, password: pass
+              // email: 'sdf@gm.in',
+              );
 
       await addUserToDB(
         UserModel(
@@ -53,9 +52,8 @@ class FirebaseService {
   Future<void> signInWithEmailAndPassword(String email, String pass) async {
     try {
       final UserCredential userCredential = await FirebaseAuth.instance
-          // .signInWithEmailAndPassword(email: email, password: pass);
-          .signInWithEmailAndPassword(
-              email: 'sdf@gm.in', password: 'Sharan@57');
+          .signInWithEmailAndPassword(email: email, password: pass);
+      // .signInWithEmailAndPassword(
 
       currentUser = UserModel.fromJson(
         (await firestore
